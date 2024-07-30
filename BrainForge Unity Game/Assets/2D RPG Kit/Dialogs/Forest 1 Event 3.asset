@@ -1,0 +1,49 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b2556bb0d236966468fd1e6bd2eeaffd, type: 3}
+  m_Name: Forest 1 Event 3
+  m_EditorClassIdentifier: 
+  portraits:
+  - {fileID: 699703873648253923, guid: 5dee9006179220145ba7295536490dbc, type: 3}
+  - {fileID: 2434629766918126224, guid: 5dee9006179220145ba7295536490dbc, type: 3}
+  - {fileID: 8558633213039616950, guid: 5dee9006179220145ba7295536490dbc, type: 3}
+  lines:
+  - //Man
+  - '**2'
+  - Thanks for the help pals!
+  - The name is Mozzer.
+  - Although my friends call me Moz.
+  - //Rem
+  - '**0'
+  - How did you manage to get stuck on the other side of the river?
+  - //Moz
+  - '**2'
+  - I don't know...
+  - Just wanted to catch some z's under the tree.
+  - When I woke up, some jester had already pulled all the logs out of the water.
+  - I could have just swimmed over but I didn't want my clobber to get wet.
+  - //Hollis
+  - '**1'
+  - Good thing we just came here on our way to the cave.
+  - //Moz
+  - '**2'
+  - Very true kid!
+  - Anyway, what can two tots like you look for in that creepy cave?
+  - //Rem
+  - '**0'
+  - We need the magic truffles that grow there for my mother's recipe.
+  - //Moz
+  - '**2'
+  - Magic truffels, huh?
+  - I heard the magic truffle has a fantastic taste that is ideal for meat dishes.
+  - Alright! You helped me out so I will help you in your search!
+  closingMessage: []

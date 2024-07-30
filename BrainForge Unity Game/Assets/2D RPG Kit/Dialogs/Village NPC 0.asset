@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b2556bb0d236966468fd1e6bd2eeaffd, type: 3}
+  m_Name: Village NPC 0
+  m_EditorClassIdentifier: 
+  portraits: []
+  lines:
+  - //Villager
+  - '**'
+  - You need enough gold if you want to buy items.
+  - You can set the amount of gold the player shall start with in the "GameManager"
+    prefab!
+  closingMessage: []

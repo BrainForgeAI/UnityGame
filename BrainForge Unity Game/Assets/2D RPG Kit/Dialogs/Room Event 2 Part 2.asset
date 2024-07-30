@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b2556bb0d236966468fd1e6bd2eeaffd, type: 3}
+  m_Name: Room Event 2 Part 2
+  m_EditorClassIdentifier: 
+  portraits:
+  - {fileID: 699703873648253923, guid: 5dee9006179220145ba7295536490dbc, type: 3}
+  lines:
+  - //Rem
+  - '**0'
+  - '*Yawn*'
+  - It's morning already.
+  - ...
+  - Oh right, I promissed mom to help her with something.
+  - What was it again?
+  closingMessage: []
