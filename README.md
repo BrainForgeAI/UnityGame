@@ -2,6 +2,7 @@
 
 ## Prerequisites
 - Unity installed on your system (make sure its the Student Plan Version)
+- Editor Version: 2022.3.35f1
 
 ## Getting Started
 
