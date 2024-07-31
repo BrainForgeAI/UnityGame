@@ -11,7 +11,7 @@
 
 3. Click "Add project" (NOT "New project").
 
-4. Select the "Gemini AI Project" folder as the project directory.
+4. Select the "Brainforge Unity Game" folder as the project directory.
    - **Important:** Do not select the "unity-game-implementation" folder, as Unity won't detect the necessary files.
 
 5. If prompted, choose the "2D Universal" environment.
