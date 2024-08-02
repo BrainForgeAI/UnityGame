@@ -170,6 +170,11 @@ public class BattleManager : MonoBehaviour
     public bool noRetreat;
     public bool unbeatable;
 
+    // Question Prompt
+    [Header("Question Display")]
+    public Text questionText; // Assign this in the Unity Inspector
+    public float textDisplayDuration = 3f; // Duration to display the text, adjustable in Inspector
+
     //For the DelayCo() so the function knows which character is selected when using items
     int selectCharForItem;
 
@@ -382,6 +387,11 @@ public class BattleManager : MonoBehaviour
             GameMenu.instance.btn = attackButton;
             GameMenu.instance.SelectFirstButton();
         }
+
+        
+        // Poll attack button so that we know when it is pressed
+        attackButton.onClick.AddListener(OnAttackButtonPressed);
+
 
         //Put the correct values into the character status within the battle menu
         UpdateCharacterStatus();
@@ -671,6 +681,12 @@ public class BattleManager : MonoBehaviour
         yield return new WaitForSeconds(1f);
         NextTurn();
 
+    }
+
+    // If attack button pressed display the question
+    public void OnAttackButtonPressed()
+    {
+        StartCoroutine(DisplayQuestionCoroutine());
     }
 
     //Method for enemy attacks
@@ -1105,6 +1121,24 @@ public class BattleManager : MonoBehaviour
         StartCoroutine(DelayAttackCo(moveName, selectedTarget));
 
     }
+
+    // Question display
+
+    private IEnumerator DisplayQuestionCoroutine()
+    {
+        // Display the question text
+        questionText.text = "Here's a question for you";
+        questionText.gameObject.SetActive(true);
+
+        // Wait for the specified duration
+        yield return new WaitForSeconds(textDisplayDuration);
+
+        // Hide the question text
+        questionText.gameObject.SetActive(false);
+
+        // Here you can add any additional logic that should happen after displaying the question
+    }
+
 
     //Adds a slight delay between choosing the target and affecting the target with the item
     public IEnumerator DelayAttackCo(string moveName, int selectedTarget)

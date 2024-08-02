@@ -53,7 +53,7 @@ MonoBehaviour:
     defenseModifier: 0
     canPoison: 0
     canSilence: 0
-    skillPower: 7
+    skillPower: 70
     skillCost: 2
     description: Fire type skill
     strongAgainst: 05000000
