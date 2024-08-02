@@ -12,6 +12,8 @@ public class BattleManagerEditor : Editor
     //initialization
     private SerializedProperty battleScene; 
     private SerializedProperty battlePrompts;
+    private SerializedProperty questionText;
+    private SerializedProperty textDisplayDuration;
     private SerializedProperty targetCharacterMenu;
     private SerializedProperty battleMenu;
     private SerializedProperty statusMenu;
@@ -109,6 +111,12 @@ public class BattleManagerEditor : Editor
         //initialization
         battleScene = soTarget.FindProperty("battleScene");
         battlePrompts = soTarget.FindProperty("battlePrompts");
+        //question stuff
+        battleManagerTarget = (BattleManager)target;
+        soTarget = new SerializedObject(target);
+        questionText = soTarget.FindProperty("questionText");
+        textDisplayDuration = soTarget.FindProperty("textDisplayDuration");
+
         targetCharacterMenu = soTarget.FindProperty("targetCharacterMenu");
         battleMenu = soTarget.FindProperty("battleMenu");
         statusMenu = soTarget.FindProperty("statusMenu");
@@ -241,6 +249,12 @@ public class BattleManagerEditor : Editor
             case "Initialization":
                 EditorGUILayout.PropertyField(battleScene);
                 EditorGUILayout.PropertyField(battlePrompts);
+                // Question stuff
+                EditorGUILayout.Space();
+                EditorGUILayout.LabelField("Question Display", EditorStyles.boldLabel);
+                EditorGUILayout.PropertyField(questionText);
+                EditorGUILayout.PropertyField(textDisplayDuration);
+
                 EditorGUILayout.PropertyField(targetCharacterMenu);
                 EditorGUILayout.PropertyField(battleMenu);
                 EditorGUILayout.PropertyField(statusMenu);

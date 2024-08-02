@@ -1139,6 +1139,22 @@ public class BattleManager : MonoBehaviour
         // Here you can add any additional logic that should happen after displaying the question
     }
 
+    public void DisplayQuestionText(string question) // also added this
+    {
+        if (questionText != null)
+        {
+            questionText.text = question;
+            questionText.gameObject.SetActive(true);
+            StartCoroutine(HideQuestionText());
+        }
+    }
+
+    private IEnumerator HideQuestionText()
+    {
+        yield return new WaitForSeconds(textDisplayDuration);
+        questionText.gameObject.SetActive(false);
+    }
+
 
     //Adds a slight delay between choosing the target and affecting the target with the item
     public IEnumerator DelayAttackCo(string moveName, int selectedTarget)
