@@ -4,6 +4,14 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using UnityStandardAssets.CrossPlatformInput;
+using UnityEngine.Networking;
+
+[System.Serializable]
+public class ErrorResponse
+{
+    public string error;
+}
+
 
 public class BattleManager : MonoBehaviour
 {
@@ -686,7 +694,7 @@ public class BattleManager : MonoBehaviour
     // If attack button pressed display the question
     public void OnAttackButtonPressed()
     {
-        StartCoroutine(DisplayQuestionCoroutine());
+        StartCoroutine(GetQuestionCoroutine());
     }
 
     //Method for enemy attacks
@@ -1123,20 +1131,42 @@ public class BattleManager : MonoBehaviour
     }
 
     // Question display
+    private const string SERVER_URL = "http://localhost:5001"; // Adjust the port if needed
 
-    private IEnumerator DisplayQuestionCoroutine()
+     private IEnumerator GetQuestionCoroutine()
     {
-        // Display the question text
-        questionText.text = "Here's a question for you";
-        questionText.gameObject.SetActive(true);
+        string url = $"{SERVER_URL}/get_question";
+        
+        using (UnityWebRequest webRequest = UnityWebRequest.Get(url))
+        {
+            yield return webRequest.SendWebRequest();
 
-        // Wait for the specified duration
-        yield return new WaitForSeconds(textDisplayDuration);
-
-        // Hide the question text
-        questionText.gameObject.SetActive(false);
-
-        // Here you can add any additional logic that should happen after displaying the question
+            if (webRequest.responseCode == 400) // Expected "Bad Request" response
+            {
+                string responseText = webRequest.downloadHandler.text;
+                ErrorResponse errorResponse = JsonUtility.FromJson<ErrorResponse>(responseText);
+                
+                if (errorResponse != null && !string.IsNullOrEmpty(errorResponse.error))
+                {
+                    Debug.Log($"Expected error received: {errorResponse.error}");
+                }
+                else
+                {
+                    Debug.LogWarning("Received a 400 response, but couldn't parse the error message.");
+                    Debug.Log($"Full response: {responseText}");
+                }
+            }
+            else if (webRequest.result != UnityWebRequest.Result.Success)
+            {
+                Debug.LogError($"Unexpected error: {webRequest.error}");
+                Debug.LogError($"Response Code: {webRequest.responseCode}");
+            }
+            else
+            {
+                string responseText = webRequest.downloadHandler.text;
+                Debug.Log($"Received question: {responseText}");
+            }
+        }
     }
 
     public void DisplayQuestionText(string question) // also added this
