@@ -7,11 +7,16 @@ using UnityStandardAssets.CrossPlatformInput;
 using UnityEngine.Networking;
 
 [System.Serializable]
+public class QuestionResponse
+{
+    public string question;
+}
+
+[System.Serializable]
 public class ErrorResponse
 {
     public string error;
 }
-
 
 public class BattleManager : MonoBehaviour
 {
@@ -1133,7 +1138,7 @@ public class BattleManager : MonoBehaviour
     // Question display
     private const string SERVER_URL = "http://localhost:5001"; // Adjust the port if needed
 
-     private IEnumerator GetQuestionCoroutine()
+    private IEnumerator GetQuestionCoroutine()
     {
         string url = $"{SERVER_URL}/get_question";
         
@@ -1148,7 +1153,7 @@ public class BattleManager : MonoBehaviour
                 
                 if (errorResponse != null && !string.IsNullOrEmpty(errorResponse.error))
                 {
-                    Debug.Log($"Expected error received: {errorResponse.error}");
+                    Debug.Log($"Error received: {errorResponse.error}");
                 }
                 else
                 {
@@ -1164,12 +1169,22 @@ public class BattleManager : MonoBehaviour
             else
             {
                 string responseText = webRequest.downloadHandler.text;
-                Debug.Log($"Received question: {responseText}");
+                QuestionResponse questionResponse = JsonUtility.FromJson<QuestionResponse>(responseText);
+                
+                if (questionResponse != null && !string.IsNullOrEmpty(questionResponse.question))
+                {
+                    Debug.Log($"Received question: {questionResponse.question}");
+                }
+                else
+                {
+                    Debug.LogWarning("Received a response, but couldn't parse the question.");
+                    Debug.Log($"Full response: {responseText}");
+                }
             }
         }
     }
 
-    public void DisplayQuestionText(string question) // also added this
+    public void DisplayQuestionText(string question)
     {
         if (questionText != null)
         {
@@ -1177,12 +1192,18 @@ public class BattleManager : MonoBehaviour
             questionText.gameObject.SetActive(true);
             StartCoroutine(HideQuestionText());
         }
+        else
+        {
+            Debug.LogError("questionText is not assigned in the Unity Inspector!");
+        }
     }
-
     private IEnumerator HideQuestionText()
     {
-        yield return new WaitForSeconds(textDisplayDuration);
-        questionText.gameObject.SetActive(false);
+        yield return new WaitForSeconds(5f); // Display for 5 seconds
+        if (questionText != null)
+        {
+            questionText.gameObject.SetActive(false);
+        }
     }
 
 
