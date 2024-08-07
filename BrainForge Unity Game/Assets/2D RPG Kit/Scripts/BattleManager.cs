@@ -1136,53 +1136,71 @@ public class BattleManager : MonoBehaviour
     }
 
     // Question display
+
     private const string SERVER_URL = "http://localhost:5001"; // Adjust the port if needed
+
 
     private IEnumerator GetQuestionCoroutine()
     {
         string url = $"{SERVER_URL}/get_question";
-        
+
         using (UnityWebRequest webRequest = UnityWebRequest.Get(url))
         {
             yield return webRequest.SendWebRequest();
 
-            if (webRequest.responseCode == 400) // Expected "Bad Request" response
+            if (webRequest.responseCode == 400)
             {
                 string responseText = webRequest.downloadHandler.text;
                 ErrorResponse errorResponse = JsonUtility.FromJson<ErrorResponse>(responseText);
-                
+
                 if (errorResponse != null && !string.IsNullOrEmpty(errorResponse.error))
                 {
                     Debug.Log($"Error received: {errorResponse.error}");
+                    DisplayQuestion($"Error: {errorResponse.error}");
                 }
                 else
                 {
                     Debug.LogWarning("Received a 400 response, but couldn't parse the error message.");
-                    Debug.Log($"Full response: {responseText}");
+                    DisplayQuestion("An error occurred while fetching the question.");
                 }
             }
             else if (webRequest.result != UnityWebRequest.Result.Success)
             {
                 Debug.LogError($"Unexpected error: {webRequest.error}");
-                Debug.LogError($"Response Code: {webRequest.responseCode}");
+                DisplayQuestion("An error occurred while fetching the question.");
             }
             else
             {
                 string responseText = webRequest.downloadHandler.text;
                 QuestionResponse questionResponse = JsonUtility.FromJson<QuestionResponse>(responseText);
-                
+
                 if (questionResponse != null && !string.IsNullOrEmpty(questionResponse.question))
                 {
                     Debug.Log($"Received question: {questionResponse.question}");
+                    DisplayQuestion(questionResponse.question);
                 }
                 else
                 {
                     Debug.LogWarning("Received a response, but couldn't parse the question.");
-                    Debug.Log($"Full response: {responseText}");
+                    DisplayQuestion("Unable to load question. Please try again.");
                 }
             }
         }
     }
+
+
+    private void DisplayQuestion(string question)
+    {
+        if (GlobalUIManager.Instance != null)
+        {
+            GlobalUIManager.Instance.UpdateQuestionText(question);
+        }
+        else
+        {
+            Debug.LogError("GlobalUIManager instance not found!");
+        }
+    }
+
 
     public void DisplayQuestionText(string question)
     {
