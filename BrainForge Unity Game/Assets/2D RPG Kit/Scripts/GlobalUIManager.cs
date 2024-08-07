@@ -4,7 +4,8 @@ using UnityEngine.UI;
 public class GlobalUIManager : MonoBehaviour
 {
     public static GlobalUIManager Instance { get; private set; }
-    private Text questionText;
+
+    public Text questionText; // Assign this in the Unity Inspector
 
     private void Awake()
     {
@@ -12,7 +13,6 @@ public class GlobalUIManager : MonoBehaviour
         {
             Instance = this;
             DontDestroyOnLoad(gameObject);
-            SetupUI();
         }
         else
         {
@@ -20,43 +20,26 @@ public class GlobalUIManager : MonoBehaviour
         }
     }
 
-    private void SetupUI()
-    {
-        // Find existing canvas or create a new one
-        Canvas canvas = FindObjectOfType<Canvas>();
-        if (canvas == null)
-        {
-            canvas = new GameObject("UICanvas").AddComponent<Canvas>();
-            canvas.renderMode = RenderMode.ScreenSpaceOverlay;
-            canvas.transform.SetParent(transform);
-        }
-
-        // Find existing question text or create a new one
-        questionText = canvas.GetComponentInChildren<Text>();
-        if (questionText == null)
-        {
-            GameObject textObj = new GameObject("QuestionText");
-            questionText = textObj.AddComponent<Text>();
-            questionText.transform.SetParent(canvas.transform, false);
-            questionText.rectTransform.anchorMin = new Vector2(0, 1);
-            questionText.rectTransform.anchorMax = new Vector2(1, 1);
-            questionText.rectTransform.anchoredPosition = new Vector2(0, -50);
-            questionText.rectTransform.sizeDelta = new Vector2(0, 100);
-            questionText.alignment = TextAnchor.MiddleCenter;
-            questionText.fontSize = 24;
-            questionText.color = Color.white;
-        }
-    }
-
-    public void UpdateQuestionText(string newText)
+    public void UpdateQuestionText(string question)
     {
         if (questionText != null)
         {
-            questionText.text = newText;
+            questionText.text = question;
+            questionText.gameObject.SetActive(true);
+            StartCoroutine(HideQuestionText());
         }
         else
         {
-            Debug.LogError("Question Text is not set up properly!");
+            Debug.LogError("questionText is not assigned in the Unity Inspector!");
+        }
+    }
+
+    private System.Collections.IEnumerator HideQuestionText()
+    {
+        yield return new WaitForSeconds(5f); // Display for 5 seconds
+        if (questionText != null)
+        {
+            questionText.gameObject.SetActive(false);
         }
     }
 }

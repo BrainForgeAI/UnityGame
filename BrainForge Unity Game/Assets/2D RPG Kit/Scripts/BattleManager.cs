@@ -1190,40 +1190,16 @@ public class BattleManager : MonoBehaviour
 
 
     private void DisplayQuestion(string question)
+{
+    if (GlobalUIManager.Instance != null)
     {
-        if (GlobalUIManager.Instance != null)
-        {
-            GlobalUIManager.Instance.UpdateQuestionText(question);
-        }
-        else
-        {
-            Debug.LogError("GlobalUIManager instance not found!");
-        }
+        GlobalUIManager.Instance.UpdateQuestionText(question);
     }
-
-
-    public void DisplayQuestionText(string question)
+    else
     {
-        if (questionText != null)
-        {
-            questionText.text = question;
-            questionText.gameObject.SetActive(true);
-            StartCoroutine(HideQuestionText());
-        }
-        else
-        {
-            Debug.LogError("questionText is not assigned in the Unity Inspector!");
-        }
+        Debug.LogError("GlobalUIManager instance not found!");
     }
-    private IEnumerator HideQuestionText()
-    {
-        yield return new WaitForSeconds(5f); // Display for 5 seconds
-        if (questionText != null)
-        {
-            questionText.gameObject.SetActive(false);
-        }
-    }
-
+}
 
     //Adds a slight delay between choosing the target and affecting the target with the item
     public IEnumerator DelayAttackCo(string moveName, int selectedTarget)
