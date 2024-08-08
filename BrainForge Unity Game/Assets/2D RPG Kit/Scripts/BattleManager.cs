@@ -1143,63 +1143,69 @@ public class BattleManager : MonoBehaviour
     private IEnumerator GetQuestionCoroutine()
     {
         string url = $"{SERVER_URL}/get_question";
-
         using (UnityWebRequest webRequest = UnityWebRequest.Get(url))
         {
             yield return webRequest.SendWebRequest();
-
             if (webRequest.responseCode == 400)
             {
                 string responseText = webRequest.downloadHandler.text;
                 ErrorResponse errorResponse = JsonUtility.FromJson<ErrorResponse>(responseText);
-
                 if (errorResponse != null && !string.IsNullOrEmpty(errorResponse.error))
                 {
                     Debug.Log($"Error received: {errorResponse.error}");
-                    DisplayQuestion($"Error: {errorResponse.error}");
+                    yield return StartCoroutine(DisplayQuestionCoroutine($"Error: {errorResponse.error}"));
                 }
                 else
                 {
                     Debug.LogWarning("Received a 400 response, but couldn't parse the error message.");
-                    DisplayQuestion("An error occurred while fetching the question.");
+                    yield return StartCoroutine(DisplayQuestionCoroutine("An error occurred while fetching the question."));
                 }
             }
             else if (webRequest.result != UnityWebRequest.Result.Success)
             {
                 Debug.LogError($"Unexpected error: {webRequest.error}");
-                DisplayQuestion("An error occurred while fetching the question.");
+                yield return StartCoroutine(DisplayQuestionCoroutine("An error occurred while fetching the question."));
             }
             else
             {
                 string responseText = webRequest.downloadHandler.text;
                 QuestionResponse questionResponse = JsonUtility.FromJson<QuestionResponse>(responseText);
-
                 if (questionResponse != null && !string.IsNullOrEmpty(questionResponse.question))
                 {
                     Debug.Log($"Received question: {questionResponse.question}");
-                    DisplayQuestion(questionResponse.question);
+                    yield return StartCoroutine(DisplayQuestionCoroutine(questionResponse.question));
                 }
                 else
                 {
                     Debug.LogWarning("Received a response, but couldn't parse the question.");
-                    DisplayQuestion("Unable to load question. Please try again.");
+                    yield return StartCoroutine(DisplayQuestionCoroutine("Unable to load question. Please try again."));
                 }
             }
         }
     }
 
-
-    private void DisplayQuestion(string question)
-{
-    if (GlobalUIManager.Instance != null)
+    private IEnumerator DisplayQuestionCoroutine(string question)
     {
+        while (GlobalUIManager.Instance == null)
+        {
+            Debug.Log("Waiting for GlobalUIManager to be initialized...");
+            yield return new WaitForSeconds(0.1f);
+        }
         GlobalUIManager.Instance.UpdateQuestionText(question);
     }
-    else
+
+
+    private void DisplayQuestion(string question)
     {
-        Debug.LogError("GlobalUIManager instance not found!");
+        if (GlobalUIManager.Instance != null)
+        {
+            GlobalUIManager.Instance.UpdateQuestionText(question);
+        }
+        else
+        {
+            Debug.LogError("GlobalUIManager instance not found!");
+        }
     }
-}
 
     //Adds a slight delay between choosing the target and affecting the target with the item
     public IEnumerator DelayAttackCo(string moveName, int selectedTarget)
