@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   portraits: []
   lines:
-  - //Villager
+  - //Dock Guard
   - '**'
-  - 'Use Unity''s layer system and the predefined sorting order provided with the '
-  - 2D RPG Maker Kit to create convincing environments!
+  - Halt! The seas are treacherous, and only the strong may pass. 
+  - Prove your worth in combat by stepping towards the dock, or turn back now."
   closingMessage: []
