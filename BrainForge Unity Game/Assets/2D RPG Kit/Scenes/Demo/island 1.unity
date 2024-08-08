@@ -3685,6 +3685,145 @@ TilemapCollider2D:
   m_MaximumTileChangeCount: 1000
   m_ExtrusionFactor: 0.00001
   m_UseDelaunayMesh: 0
+--- !u!1001 &717136259
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 2542565290835116686, guid: e3537ab304d63544280b86803b7ea07e,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: -4083037557757780877, guid: 25c66a954ad7cd441927691357c2b238,
+        type: 3}
+    - target: {fileID: 5495425214309360208, guid: e3537ab304d63544280b86803b7ea07e,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: -6064747085780015189, guid: 25c66a954ad7cd441927691357c2b238,
+        type: 3}
+    - target: {fileID: 5495425214309360208, guid: e3537ab304d63544280b86803b7ea07e,
+        type: 3}
+      propertyPath: m_WasSpriteAssigned
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5495425214309360209, guid: e3537ab304d63544280b86803b7ea07e,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 11.78
+      objectReference: {fileID: 0}
+    - target: {fileID: 5495425214309360209, guid: e3537ab304d63544280b86803b7ea07e,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -13.53
+      objectReference: {fileID: 0}
+    - target: {fileID: 5495425214309360209, guid: e3537ab304d63544280b86803b7ea07e,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5495425214309360209, guid: e3537ab304d63544280b86803b7ea07e,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5495425214309360209, guid: e3537ab304d63544280b86803b7ea07e,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5495425214309360209, guid: e3537ab304d63544280b86803b7ea07e,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5495425214309360209, guid: e3537ab304d63544280b86803b7ea07e,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5495425214309360209, guid: e3537ab304d63544280b86803b7ea07e,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5495425214309360209, guid: e3537ab304d63544280b86803b7ea07e,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5495425214309360209, guid: e3537ab304d63544280b86803b7ea07e,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5495425214309360213, guid: e3537ab304d63544280b86803b7ea07e,
+        type: 3}
+      propertyPath: m_Name
+      value: Battle Dock NPC
+      objectReference: {fileID: 0}
+    - target: {fileID: 5495425214309360222, guid: e3537ab304d63544280b86803b7ea07e,
+        type: 3}
+      propertyPath: bodyUp
+      value: 
+      objectReference: {fileID: 2114220691001502603, guid: 25c66a954ad7cd441927691357c2b238,
+        type: 3}
+    - target: {fileID: 5495425214309360222, guid: e3537ab304d63544280b86803b7ea07e,
+        type: 3}
+      propertyPath: dialog
+      value: 
+      objectReference: {fileID: 11400000, guid: 483a95dfd155f85469ba4f9e622be79c,
+        type: 2}
+    - target: {fileID: 5495425214309360222, guid: e3537ab304d63544280b86803b7ea07e,
+        type: 3}
+      propertyPath: headUp
+      value: 
+      objectReference: {fileID: -569077845080978727, guid: 25c66a954ad7cd441927691357c2b238,
+        type: 3}
+    - target: {fileID: 5495425214309360222, guid: e3537ab304d63544280b86803b7ea07e,
+        type: 3}
+      propertyPath: bodyDown
+      value: 
+      objectReference: {fileID: 7243568032972742785, guid: 25c66a954ad7cd441927691357c2b238,
+        type: 3}
+    - target: {fileID: 5495425214309360222, guid: e3537ab304d63544280b86803b7ea07e,
+        type: 3}
+      propertyPath: bodyLeft
+      value: 
+      objectReference: {fileID: -162838474379477710, guid: 25c66a954ad7cd441927691357c2b238,
+        type: 3}
+    - target: {fileID: 5495425214309360222, guid: e3537ab304d63544280b86803b7ea07e,
+        type: 3}
+      propertyPath: headDown
+      value: 
+      objectReference: {fileID: -3925300138411947666, guid: 25c66a954ad7cd441927691357c2b238,
+        type: 3}
+    - target: {fileID: 5495425214309360222, guid: e3537ab304d63544280b86803b7ea07e,
+        type: 3}
+      propertyPath: headLeft
+      value: 
+      objectReference: {fileID: -6505226450838528523, guid: 25c66a954ad7cd441927691357c2b238,
+        type: 3}
+    - target: {fileID: 5495425214309360222, guid: e3537ab304d63544280b86803b7ea07e,
+        type: 3}
+      propertyPath: bodyRight
+      value: 
+      objectReference: {fileID: -5183268713496094073, guid: 25c66a954ad7cd441927691357c2b238,
+        type: 3}
+    - target: {fileID: 5495425214309360222, guid: e3537ab304d63544280b86803b7ea07e,
+        type: 3}
+      propertyPath: headRight
+      value: 
+      objectReference: {fileID: -4083037557757780877, guid: 25c66a954ad7cd441927691357c2b238,
+        type: 3}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: e3537ab304d63544280b86803b7ea07e, type: 3}
 --- !u!1 &777035537
 GameObject:
   m_ObjectHideFlags: 0
@@ -62351,7 +62490,7 @@ PrefabInstance:
     - target: {fileID: 9030749063508831567, guid: 015fba17eb1ff464f8710b845b84e9ed,
         type: 3}
       propertyPath: encounterRateEasy
-      value: 1
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 9030749063508831567, guid: 015fba17eb1ff464f8710b845b84e9ed,
         type: 3}
@@ -62568,6 +62707,7 @@ SceneRoots:
   - {fileID: 195563607}
   - {fileID: 2096136833}
   - {fileID: 882810966}
+  - {fileID: 717136259}
   - {fileID: 284696416}
   - {fileID: 1576967285}
   - {fileID: 490190596}
