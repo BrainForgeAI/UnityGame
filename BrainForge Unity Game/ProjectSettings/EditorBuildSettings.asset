@@ -68,4 +68,16 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Tutorial Maps/Tutorial Town.unity
     guid: b8fcb41ce1e923b44b0feeae5abb32cd
+  - enabled: 1
+    path: Assets/2D RPG Kit/Scenes/Demo/island 1.unity
+    guid: f607b33472a2b8a478adc56ac05fea00
+  - enabled: 1
+    path: Assets/2D RPG Kit/Scenes/Demo/island 2.unity
+    guid: cb3eb090cb9dcc64ca29c33321eefbc3
+  - enabled: 1
+    path: Assets/2D RPG Kit/Scenes/Demo/island 3.unity
+    guid: 63527fa8fd37f754bbefb45546aac3ef
+  - enabled: 1
+    path: Assets/2D RPG Kit/Scenes/Demo/island 4.unity
+    guid: 5eef7eccee330354786ee151f7cb5b7a
   m_configObjects: {}

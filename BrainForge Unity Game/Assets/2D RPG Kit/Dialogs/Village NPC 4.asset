@@ -17,5 +17,10 @@ MonoBehaviour:
   - //Dock Guard
   - '**'
   - Halt! The seas are treacherous, and only the strong may pass. 
-  - Prove your worth in combat by stepping towards the dock, or turn back now."
+  - //Rem
+  - '**'
+  - I must leave to help our island. I'm ready to face your challenge.
+  - //Dock Guard
+  - '**'
+  - Very well. Show me what you're made of! Step towards the island dock.
   closingMessage: []

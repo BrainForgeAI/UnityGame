@@ -124,7 +124,8 @@ MonoBehaviour:
   defeatedSprite: {fileID: 1854990784135541863, guid: 27dbc76a92eead94ebb2736fc7e7f488,
     type: 3}
   aliveSprite: {fileID: 21300024, guid: 31c2316ca8401de439f450d95d650653, type: 3}
-  portrait: {fileID: 699703873648253923, guid: 5dee9006179220145ba7295536490dbc, type: 3}
+  portrait: {fileID: -7214362519570876188, guid: 5f9c6213e97ae28468411d896f31d404,
+    type: 3}
   HPBar: {fileID: 0}
   poisonUi: {fileID: 0}
   silenceUi: {fileID: 0}
