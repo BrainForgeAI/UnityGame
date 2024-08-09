@@ -1139,13 +1139,14 @@ public class BattleManager : MonoBehaviour
 
     private const string SERVER_URL = "http://localhost:5001"; // Adjust the port if needed
 
-
     private IEnumerator GetQuestionCoroutine()
     {
         string url = $"{SERVER_URL}/get_question";
         using (UnityWebRequest webRequest = UnityWebRequest.Get(url))
         {
             yield return webRequest.SendWebRequest();
+            string questionToDisplay = "";
+
             if (webRequest.responseCode == 400)
             {
                 string responseText = webRequest.downloadHandler.text;
@@ -1153,18 +1154,18 @@ public class BattleManager : MonoBehaviour
                 if (errorResponse != null && !string.IsNullOrEmpty(errorResponse.error))
                 {
                     Debug.Log($"Error received: {errorResponse.error}");
-                    yield return StartCoroutine(DisplayQuestionCoroutine($"Error: {errorResponse.error}"));
+                    questionToDisplay = $"Error: {errorResponse.error}";
                 }
                 else
                 {
                     Debug.LogWarning("Received a 400 response, but couldn't parse the error message.");
-                    yield return StartCoroutine(DisplayQuestionCoroutine("An error occurred while fetching the question."));
+                    questionToDisplay = "An error occurred while fetching the question.";
                 }
             }
             else if (webRequest.result != UnityWebRequest.Result.Success)
             {
                 Debug.LogError($"Unexpected error: {webRequest.error}");
-                yield return StartCoroutine(DisplayQuestionCoroutine("An error occurred while fetching the question."));
+                questionToDisplay = "An error occurred while fetching the question.";
             }
             else
             {
@@ -1173,27 +1174,18 @@ public class BattleManager : MonoBehaviour
                 if (questionResponse != null && !string.IsNullOrEmpty(questionResponse.question))
                 {
                     Debug.Log($"Received question: {questionResponse.question}");
-                    yield return StartCoroutine(DisplayQuestionCoroutine(questionResponse.question));
+                    questionToDisplay = questionResponse.question;
                 }
                 else
                 {
                     Debug.LogWarning("Received a response, but couldn't parse the question.");
-                    yield return StartCoroutine(DisplayQuestionCoroutine("Unable to load question. Please try again."));
+                    questionToDisplay = "Unable to load question. Please try again.";
                 }
             }
+
+            DisplayQuestion(questionToDisplay);
         }
     }
-
-    private IEnumerator DisplayQuestionCoroutine(string question)
-    {
-        while (GlobalUIManager.Instance == null)
-        {
-            Debug.Log("Waiting for GlobalUIManager to be initialized...");
-            yield return new WaitForSeconds(0.1f);
-        }
-        GlobalUIManager.Instance.UpdateQuestionText(question);
-    }
-
 
     private void DisplayQuestion(string question)
     {
@@ -1203,7 +1195,34 @@ public class BattleManager : MonoBehaviour
         }
         else
         {
-            Debug.LogError("GlobalUIManager instance not found!");
+            Debug.LogError("GlobalUIManager instance is null!");
+        }
+    }
+
+    public void SubmitAnswer(string answer)
+    {
+        StartCoroutine(SendAnswerToServer(answer));
+    }
+
+    private IEnumerator SendAnswerToServer(string answer)
+    {
+        WWWForm form = new WWWForm();
+        form.AddField("answer", answer);
+
+        using (UnityWebRequest www = UnityWebRequest.Post($"{SERVER_URL}/submit_answer", form))
+        {
+            yield return www.SendWebRequest();
+
+            if (www.result != UnityWebRequest.Result.Success)
+            {
+                Debug.LogError($"Error sending answer: {www.error}");
+                DisplayQuestion("Error submitting answer. Please try again.");
+            }
+            else
+            {
+                Debug.Log("Answer submitted successfully!");
+                DisplayQuestion("Answer submitted successfully!");
+            }
         }
     }
 
