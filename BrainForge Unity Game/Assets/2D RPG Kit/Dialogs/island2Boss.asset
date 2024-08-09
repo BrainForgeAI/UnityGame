@@ -1,0 +1,38 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b2556bb0d236966468fd1e6bd2eeaffd, type: 3}
+  m_Name: island2Boss
+  m_EditorClassIdentifier: 
+  portraits:
+  - {fileID: 699703873648253923, guid: 5dee9006179220145ba7295536490dbc, type: 3}
+  lines:
+  - //Island Boss
+  - '**'
+  - So, you're the one causing all this commotion. What do you want?
+  - //Rem
+  - '**'
+  - Sir, I come from a struggling island.
+  - Our resources are depleting, and our people are suffering. We need help.
+  - //Island Boss
+  - '**'
+  - And why should I care about your problems? We have our own issues to deal with.
+  - //Rem
+  - '**'
+  - Because helping us could benefit you too. We have skilled craftsmen and fertile
+    land.
+  - With some support, we could become valuable trading partners.
+  - //Island Boss
+  - '**'
+  - Hmm... You make an interesting point. But words are cheap.
+  - Prove your worth in combat by stepping towards my house, and I might consider your proposal.
+  
+  closingMessage: []
