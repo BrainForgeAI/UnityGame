@@ -1773,8 +1773,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9ddca49db092ebb4eaff9affbb973350, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  toolbar: 3
-  currentTab: Skills
+  toolbar: 2
+  currentTab: Prefabs
   usable: 0
   buttonValue: 0
   spriteRenderer: {fileID: 212760558863176084}
@@ -1898,7 +1898,7 @@ MonoBehaviour:
   enemyPrefabs:
   - {fileID: 114895784032005762, guid: 50dfc597023a36844b3918cbbcd96036, type: 3}
   - {fileID: 114895784032005762, guid: 0e2dc2e83d0d8514ab6102c59e9d106e, type: 3}
-  - {fileID: 114895784032005762, guid: 8622e2d9bb1b5a145830a66f2971f5b2, type: 3}
+  - {fileID: 114895784032005762, guid: 88d59fc7ff484b74abd86e67fc39af21, type: 3}
   - {fileID: 114895784032005762, guid: 88d59fc7ff484b74abd86e67fc39af21, type: 3}
   - {fileID: 114895784032005762, guid: fc7885e032d7f18409f13d66ff6b7f7d, type: 3}
   - {fileID: 114895784032005762, guid: 6e73f5777a945044d9b7b442fce059ca, type: 3}
@@ -1993,6 +1993,8 @@ MonoBehaviour:
   rewardEquipItems: []
   noRetreat: 0
   unbeatable: 0
+  questionText: {fileID: 0}
+  textDisplayDuration: 3
   selectedSkillChar: 0
   selectedSkillCost: 0
   selectedSkillPower: 0
