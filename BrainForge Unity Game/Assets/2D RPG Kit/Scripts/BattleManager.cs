@@ -696,10 +696,14 @@ public class BattleManager : MonoBehaviour
 
     }
 
-    // If attack button pressed display the question
+    // If attack button pressed display the question and the input field.
     public void OnAttackButtonPressed()
     {
         StartCoroutine(GetQuestionCoroutine());
+        if (GlobalUIManager.Instance != null)
+        {
+            GlobalUIManager.Instance.ShowAnswerInput();
+        }
     }
 
     //Method for enemy attacks
@@ -1225,6 +1229,7 @@ public class BattleManager : MonoBehaviour
             }
         }
     }
+
 
     //Adds a slight delay between choosing the target and affecting the target with the item
     public IEnumerator DelayAttackCo(string moveName, int selectedTarget)
