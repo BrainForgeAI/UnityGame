@@ -591,6 +591,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   questionText: {fileID: 1918604640}
+  answerInputField: {fileID: 0}
+  submitButton: {fileID: 0}
 --- !u!1 &61900396
 GameObject:
   m_ObjectHideFlags: 0

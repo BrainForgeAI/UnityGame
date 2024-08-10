@@ -1,13 +1,28 @@
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
+using System.Collections;
 
 public class GlobalUIManager : MonoBehaviour
 {
     public static GlobalUIManager Instance { get; private set; }
+    public TMP_InputField answerInputField;
+    public Text questionText;
+    public Button submitButton;
+    public GameObject inputProcessingGameObject; // Add this line
 
-    public Text questionText; // Assign this in the Unity Inspector
-    public InputField answerInputField; // Assign this in the Unity Inspector
-    public Button submitButton; // Assign this in the Unity Inspector
+    private void Awake()
+    {
+        if (Instance == null)
+        {
+            Instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+    }
 
     private void Start()
     {
@@ -19,7 +34,13 @@ public class GlobalUIManager : MonoBehaviour
         {
             answerInputField.onEndEdit.AddListener(OnEndEdit);
         }
+        // Add this line
+        if (inputProcessingGameObject != null)
+        {
+            inputProcessingGameObject.SetActive(false);
+        }
     }
+
     private void OnEndEdit(string answer)
     {
         if (Input.GetKeyDown(KeyCode.Return) || Input.GetKeyDown(KeyCode.KeypadEnter))
@@ -36,6 +57,11 @@ public class GlobalUIManager : MonoBehaviour
             answerInputField.text = "";
             answerInputField.ActivateInputField();
         }
+        // Add this line
+        if (inputProcessingGameObject != null)
+        {
+            inputProcessingGameObject.SetActive(true);
+        }
     }
 
     private void SubmitAnswer()
@@ -44,19 +70,11 @@ public class GlobalUIManager : MonoBehaviour
         {
             BattleManager.instance.SubmitAnswer(answerInputField.text);
             answerInputField.gameObject.SetActive(false);
-        }
-    }
-
-    private void Awake()
-    {
-        if (Instance == null)
-        {
-            Instance = this;
-            DontDestroyOnLoad(gameObject);
-        }
-        else
-        {
-            Destroy(gameObject);
+            // Add this line
+            if (inputProcessingGameObject != null)
+            {
+                inputProcessingGameObject.SetActive(false);
+            }
         }
     }
 
@@ -75,9 +93,9 @@ public class GlobalUIManager : MonoBehaviour
         }
     }
 
-    private System.Collections.IEnumerator HideQuestionText()
+    private IEnumerator HideQuestionText()
     {
-        yield return new WaitForSeconds(5f); // Display for 5 seconds
+        yield return new WaitForSeconds(5f);
         if (questionText != null)
         {
             questionText.gameObject.SetActive(false);

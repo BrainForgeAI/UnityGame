@@ -1145,12 +1145,22 @@ public class BattleManager : MonoBehaviour
 
     private IEnumerator GetQuestionCoroutine()
     {
+        // Show the input processing UI
+        if (GlobalUIManager.Instance != null)
+        {
+            GlobalUIManager.Instance.ShowAnswerInput();
+        }
+        else
+        {
+            Debug.LogError("GlobalUIManager instance is null!");
+            yield break;
+        }
+
         string url = $"{SERVER_URL}/get_question";
         using (UnityWebRequest webRequest = UnityWebRequest.Get(url))
         {
             yield return webRequest.SendWebRequest();
             string questionToDisplay = "";
-
             if (webRequest.responseCode == 400)
             {
                 string responseText = webRequest.downloadHandler.text;
@@ -1186,7 +1196,6 @@ public class BattleManager : MonoBehaviour
                     questionToDisplay = "Unable to load question. Please try again.";
                 }
             }
-
             DisplayQuestion(questionToDisplay);
         }
     }
