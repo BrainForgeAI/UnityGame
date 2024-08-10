@@ -25,6 +25,13 @@ public class TitleScreen : MonoBehaviour {
 
     public string loadGameScene;
 
+    public GameObject fileUploadScreen;
+    public Button selectFileButton;
+    public Text selectedFileText;
+    public Button uploadButton;
+
+    private string selectedFilePath;
+
     // Use this for initialization
     void Start () {
         player = GameObject.Find("Player(Clone)");
@@ -170,40 +177,68 @@ public class TitleScreen : MonoBehaviour {
 
     public void NewGame(int difficulty)
     {
-        if (difficulty == 0)
+        // Instead of going directly to difficulty settings, show file upload screen
+        mainMenu.SetActive(false);
+        fileUploadScreen.SetActive(true);
+
+        // Set up button listeners
+        selectFileButton.onClick.AddListener(SelectFile);
+        uploadButton.onClick.AddListener(() => StartCoroutine(UploadFile(difficulty)));
+    }
+
+    private void SelectFile()
+    {
+        #if UNITY_EDITOR
+        selectedFilePath = UnityEditor.EditorUtility.OpenFilePanel("Select Syllabus", "", "pdf,doc,docx");
+        #endif
+
+        if (!string.IsNullOrEmpty(selectedFilePath))
         {
-            GameManager.instance.easy = true;
-            GameManager.instance.normal = false;
-            GameManager.instance.hard = false;
+            selectedFileText.text = Path.GetFileName(selectedFilePath);
+            uploadButton.interactable = true;
+        }
+    }
+
+    private IEnumerator UploadFile(int difficulty)
+    {
+        if (string.IsNullOrEmpty(selectedFilePath))
+        {
+            Debug.LogError("No file selected");
+            yield break;
         }
 
-        if (difficulty == 1)
+        WWWForm form = new WWWForm();
+        form.AddBinaryData("file", File.ReadAllBytes(selectedFilePath), Path.GetFileName(selectedFilePath));
+
+        using (UnityWebRequest www = UnityWebRequest.Post("http://localhost:5001/load_syllabus", form))
         {
-            GameManager.instance.easy = false;
-            GameManager.instance.normal = true;
-            GameManager.instance.hard = false;
+            yield return www.SendWebRequest();
+
+            if (www.result != UnityWebRequest.Result.Success)
+            {
+                Debug.LogError(www.error);
+            }
+            else
+            {
+                Debug.Log("File upload complete!");
+                
+                // Proceed to difficulty settings
+                fileUploadScreen.SetActive(false);
+                OpenDifficultySettings();
+                
+                // Set difficulty and load new game scene
+                SetDifficulty(difficulty);
+                ScreenFade.instance.fadeScreenObject.SetActive(true);
+                SceneManager.LoadScene(newGameScene);
+            }
         }
+    }
 
-        if (difficulty == 2)
-        {
-            GameManager.instance.easy = false;
-            GameManager.instance.normal = false;
-            GameManager.instance.hard = true;
-        }
-
-        ScreenFade.instance.fadeScreenObject.SetActive(true);
-
-        if (ControlManager.instance.mobile == true)
-        {
-            GameMenu.instance.touchMenuButton.SetActive(true);
-            GameMenu.instance.touchController.SetActive(true);
-            GameMenu.instance.touchConfirmButton.SetActive(true);
-        }
-        PlayerController.instance.canMove = true;
-        GameManager.instance.cutSceneActive = true;
-
-        
-        SceneManager.LoadScene(newGameScene);
+    private void SetDifficulty(int difficulty)
+    {
+        GameManager.instance.easy = difficulty == 0;
+        GameManager.instance.normal = difficulty == 1;
+        GameManager.instance.hard = difficulty == 2;
     }
 
     public void Exit()
