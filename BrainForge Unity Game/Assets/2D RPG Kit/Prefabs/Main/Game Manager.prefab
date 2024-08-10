@@ -229,8 +229,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c18f511f74eb2254592c491f3e6427f2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  toolbar: 1
-  currentTab: Items
+  toolbar: 3
+  currentTab: Debugging
   characterSlots:
   - {fileID: 1674758041330280}
   - {fileID: 1059803243072380}
@@ -379,8 +379,8 @@ MonoBehaviour:
   - Defeat Gourmet
   - Defeat Dock Guard
   - Begin Battle
-  - 
-  - 
+  - Defeated Guard
+  - Defeated Island Boss
   - 
   - 
   - 
@@ -442,7 +442,11 @@ MonoBehaviour:
   - Talk to Elder
   - Talk to Dock Guard
   - Talk to Dock Guard 2
-  - island1DialogueActivator
+  - island 2 dock
+  - island 2 Guard
+  - island 2 Guard 2
+  - Talked to boss
+  - Talked to boss 2
   completedEvents: 
 --- !u!1 &1527901407061400
 GameObject:

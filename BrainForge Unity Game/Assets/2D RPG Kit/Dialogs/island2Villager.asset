@@ -14,13 +14,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   portraits: []
   lines:
-  - //Distant Villager
+  - //New Villager
   - '**'
   - A newcomer? We don't get many visitors here. What brings you to our shores?
   - //Rem
   - '**'
   - I've come seeking aid for my home island. We're struggling to survive...
-  - //Distant Villager
+  - //New Villager
   - '**'
   - Ah, a noble cause. But I'm afraid our island has its own problems.
   - Our leader might be able to help, but... well,
