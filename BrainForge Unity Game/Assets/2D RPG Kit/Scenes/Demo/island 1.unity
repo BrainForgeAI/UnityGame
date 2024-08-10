@@ -63600,7 +63600,7 @@ PrefabInstance:
     - target: {fileID: 9030749063508831567, guid: 015fba17eb1ff464f8710b845b84e9ed,
         type: 3}
       propertyPath: unbeatable
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 9030749063508831567, guid: 015fba17eb1ff464f8710b845b84e9ed,
         type: 3}
@@ -63655,7 +63655,7 @@ PrefabInstance:
     - target: {fileID: 9030749063508831567, guid: 015fba17eb1ff464f8710b845b84e9ed,
         type: 3}
       propertyPath: randomBattles.Array.size
-      value: 7
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 9030749063508831567, guid: 015fba17eb1ff464f8710b845b84e9ed,
         type: 3}
@@ -63765,12 +63765,12 @@ PrefabInstance:
     - target: {fileID: 9030749063508831567, guid: 015fba17eb1ff464f8710b845b84e9ed,
         type: 3}
       propertyPath: randomBattles.Array.data[0].enemies.Array.data[0]
-      value: Bug
+      value: Gourmet
       objectReference: {fileID: 0}
     - target: {fileID: 9030749063508831567, guid: 015fba17eb1ff464f8710b845b84e9ed,
         type: 3}
       propertyPath: randomBattles.Array.data[0].enemies.Array.data[1]
-      value: Bat
+      value: Snake
       objectReference: {fileID: 0}
     - target: {fileID: 9030749063508831567, guid: 015fba17eb1ff464f8710b845b84e9ed,
         type: 3}
