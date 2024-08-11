@@ -164,8 +164,9 @@ private void StartNewGame(int difficulty)
     SceneManager.LoadScene(newGameScene);
 }
 
-    public void NewGame()
+public void NewGame()
     {
+        Debug.Log("NewGame method called");
         mainMenu.SetActive(false);
         ShowFileUploadScreen();
 
@@ -178,15 +179,24 @@ private void StartNewGame(int difficulty)
 
     private void ShowFileUploadScreen()
     {
+        Debug.Log("ShowFileUploadScreen method called");
         fileUploadScreen.SetActive(true);
         CanvasGroup canvasGroup = fileUploadScreen.GetComponent<CanvasGroup>();
         canvasGroup.alpha = 1;
         canvasGroup.interactable = true;
         canvasGroup.blocksRaycasts = true;
 
-        // Reset the selected file text and disable the upload button
+        // Ensure the file upload screen is in front of other UI elements
+        fileUploadScreen.transform.SetAsLastSibling();
+
         selectedFileText.text = "No file selected";
         uploadButton.interactable = false;
+
+        // Disable other UI elements that might be overlapping
+        if (mainMenu != null) mainMenu.SetActive(false);
+        if (difficultySettings != null) difficultySettings.SetActive(false);
+
+        Debug.Log("File upload screen should be visible now");
     }
 
     private void HideFileUploadScreen()
