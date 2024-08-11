@@ -62953,7 +62953,6 @@ MonoBehaviour:
   onActivate:
     m_PersistentCalls:
       m_Calls: []
-<<<<<<< Updated upstream
 --- !u!114 &1767027387
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -62974,7 +62973,6 @@ MonoBehaviour:
   onActivate:
     m_PersistentCalls:
       m_Calls: []
-<<<<<<< HEAD
 --- !u!1 &1767978460
 GameObject:
   m_ObjectHideFlags: 0
@@ -63109,10 +63107,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1767978460}
   m_CullTransparentMesh: 1
-=======
->>>>>>> Stashed changes
-=======
->>>>>>> parent of 9090abc (fixed UI)
 --- !u!1001 &1791067243
 PrefabInstance:
   m_ObjectHideFlags: 0
