@@ -34,9 +34,20 @@ public class TitleScreen : MonoBehaviour
 
     private string selectedFilePath;
 
+
+    // variable declaration how could I have forgotten this
+    private CanvasGroup fileUploadCanvasGroup;
+
+
     // Use this for initialization
     void Start()
     {
+        // initialization
+        fileUploadCanvasGroup = fileUploadScreen.GetComponent<CanvasGroup>();
+        if (fileUploadCanvasGroup == null)
+        {
+            fileUploadCanvasGroup = fileUploadScreen.AddComponent<CanvasGroup>();
+        }
 
         player = GameObject.Find("Player(Clone)");
         player.transform.position = new Vector2(3, 1);
@@ -51,6 +62,9 @@ public class TitleScreen : MonoBehaviour
         StartCoroutine(PressStartCo());
         ScreenFade.instance.fadeScreenObject.SetActive(false);
         AudioManager.instance.PlayBGM(music);
+        // Added listeners for file upload buttons
+        selectFileButton.onClick.AddListener(SelectFile);
+        uploadButton.onClick.AddListener(() => StartCoroutine(UploadFile()));
 
         StartCoroutine(DontShowcontrols());
     }
@@ -90,6 +104,8 @@ public class TitleScreen : MonoBehaviour
     {
         pressStart.SetActive(false);
         mainMenu.SetActive(true);
+        // Added new method
+        HideFileUploadScreen();
 
         if (PlayerPrefs.HasKey("Current_Scene"))
         {
@@ -180,19 +196,20 @@ public void NewGame()
     private void ShowFileUploadScreen()
     {
         Debug.Log("ShowFileUploadScreen method called");
-        fileUploadScreen.SetActive(true);
-        CanvasGroup canvasGroup = fileUploadScreen.GetComponent<CanvasGroup>();
-        canvasGroup.alpha = 1;
-        canvasGroup.interactable = true;
-        canvasGroup.blocksRaycasts = true;
+        fileUploadScreen.SetActive(true);  // Ensure the GameObject is active
 
-        // Ensure the file upload screen is in front of other UI elements
+        if (fileUploadCanvasGroup != null)
+        {
+            fileUploadCanvasGroup.alpha = 1;
+            fileUploadCanvasGroup.interactable = true;
+            fileUploadCanvasGroup.blocksRaycasts = true;
+        }
+
         fileUploadScreen.transform.SetAsLastSibling();
 
         selectedFileText.text = "No file selected";
         uploadButton.interactable = false;
 
-        // Disable other UI elements that might be overlapping
         if (mainMenu != null) mainMenu.SetActive(false);
         if (difficultySettings != null) difficultySettings.SetActive(false);
 
