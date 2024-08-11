@@ -10,19 +10,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b2556bb0d236966468fd1e6bd2eeaffd, type: 3}
-  m_Name: island2Villager
+  m_Name: afterGuard
   m_EditorClassIdentifier: 
-  portraits: []
+  portraits:
+  - {fileID: 699703873648253923, guid: 5dee9006179220145ba7295536490dbc, type: 3}
+  - {fileID: 2434629766918126224, guid: 5dee9006179220145ba7295536490dbc, type: 3}
   lines:
-  - //New Villager
+  - //Guard
   - '**'
-  - A newcomer? We don't get many visitors here. What brings you to our shores?
+  - Impressive... You've earned the right to see the boss. Head inside, but watch
+    yourself.
+  - The boss can be pretty fiesty despite her appereance.
   - //Rem
   - '**'
-  - I've come seeking aid for my home island. We're struggling to survive...
-  - //New Villager
-  - '**'
-  - Ah, a noble cause. But I'm afraid our island has its own problems.
-  - Our leader might be able to help, but... well,
-  - let's just say he doesn't meet with outsiders easily.
+  - Thank you. I mean no harm, I only seek help for my people.
   closingMessage: []

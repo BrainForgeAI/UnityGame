@@ -1,0 +1,48 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b2556bb0d236966468fd1e6bd2eeaffd, type: 3}
+  m_Name: afterisland2boss
+  m_EditorClassIdentifier: 
+  portraits:
+  - {fileID: 699703873648253923, guid: 5dee9006179220145ba7295536490dbc, type: 3}
+  lines:
+  - //Island Boss
+  - '**'
+  - Well fought! You've got spirit, I'll give you that.
+  - //Rem
+  - '**'
+  - Thank Y-
+  - //Island Boss
+  - '**'
+  - I'm not done talking.
+  - I'll provide some resources for your island.
+  - "But listen closely \u2013 if you want real wealth and power, you should seek
+    out the Golden Isle."
+  - //Rem
+  - '**'
+  - The Golden Isle? I've never heard of it.
+  - //Island Boss
+  - '**'
+  - Few have. It's the wealthiest island in these waters, ruled by the Merchant King.
+  - If anyone can truly help your people, it's him.
+  - "But be warned \u2013 he's as cunning as he is rich."
+  - //Rem
+  - '**'
+  - Thank you for the information and the help. How can I find this Golden Isle?
+  - //Island Boss
+  - '**'
+  - Follow the mud trail directly south of the island where you will board your boat,
+  - I will ask my butlers to transport your boat.
+  - From there take the boat northeast, past the Siren's Rocks.
+  - But remember, wealth often comes with a price.
+  - 
+  closingMessage: []
