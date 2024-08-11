@@ -236,13 +236,14 @@ public void NewGame()
         if (!string.IsNullOrEmpty(selectedFilePath))
         {
             selectedFileText.text = Path.GetFileName(selectedFilePath);
+            Debug.Log(selectedFileText.text);
             uploadButton.interactable = true;
         }
     }
 
     private IEnumerator UploadFile()
     {
-        if (string.IsNullOrEmpty(selectedFilePath))
+        if (string.IsNullOrEmpty(Path.GetFileName(selectedFilePath)))
         {
             Debug.LogError("No file selected");
             yield break;
