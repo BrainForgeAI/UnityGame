@@ -1233,11 +1233,29 @@ public class BattleManager : MonoBehaviour
             }
             else
             {
-                Debug.Log("Answer submitted successfully!");
-                DisplayQuestion("Answer submitted successfully!");
+                // Parse the JSON response
+                string responseText = www.downloadHandler.text;
+                QuestionResponse questionResponse = JsonUtility.FromJson<QuestionResponse>(responseText);
+
+                if (questionResponse != null)
+                {
+                    // Display whether the previous answer was right or wrong
+                    string feedback = questionResponse.prev_question;
+                    Debug.Log($"Feedback received: {feedback}");
+
+                    // Display the next question
+                    string questionToDisplay = questionResponse.question;
+                    DisplayQuestion($"{feedback}\nNext Question: {questionToDisplay}");
+                }
+                else
+                {
+                    Debug.LogWarning("Received a response, but couldn't parse the feedback.");
+                    DisplayQuestion("Unable to process response. Please try again.");
+                }
             }
         }
     }
+
 
 
     //Adds a slight delay between choosing the target and affecting the target with the item
