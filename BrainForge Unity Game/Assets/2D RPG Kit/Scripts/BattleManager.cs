@@ -6,10 +6,16 @@ using UnityEngine.SceneManagement;
 using UnityStandardAssets.CrossPlatformInput;
 using UnityEngine.Networking;
 
-[System.Serializable]
+
 public class QuestionResponse
 {
+    public string prev_question;
     public string question;
+    public string prev_question_answer;
+    public string prev_question_actual_right_answer;
+    public int question_number;
+    public string topic;
+    public string difficulty;
 }
 
 [System.Serializable]
@@ -1242,10 +1248,14 @@ public class BattleManager : MonoBehaviour
                     // Display whether the previous answer was right or wrong
                     string feedback = questionResponse.prev_question;
                     Debug.Log($"Feedback received: {feedback}");
+                    DisplayQuestion(feedback);
+
+                    // Wait for 5 seconds
+                    yield return new WaitForSeconds(5);
 
                     // Display the next question
                     string questionToDisplay = questionResponse.question;
-                    DisplayQuestion($"{feedback}\nNext Question: {questionToDisplay}");
+                    DisplayQuestion(questionToDisplay);
                 }
                 else
                 {
@@ -1255,6 +1265,7 @@ public class BattleManager : MonoBehaviour
             }
         }
     }
+
 
 
 
