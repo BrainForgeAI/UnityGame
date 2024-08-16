@@ -6,7 +6,7 @@
 
 ## Getting Started
 
-1. Pull the latest changes from the repository.
+1. Clone / Pull the latest changes from the repository.
 
 2. Open Unity Hub.
 
