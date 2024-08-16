@@ -55,3 +55,5 @@ To begin working on the game:
 1. Run `pre-commit install` in the root of your project directory.
 
 2. (Optional) Run pre-commit hooks manually `pre-commit run --all-files`.
+
+To get Gemini to prompt questions, you'll need to clone another repository and follow the rules there, as that aspect is on another repository: https://github.com/BrainForgeAI/GeminiApp
