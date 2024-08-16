@@ -25,3 +25,6 @@ To begin working on the game:
 2. Choose a map section to start with.
 
 **Note:** There are two "Scene" folders. Use the one from the 2D RPG KIT asset, not the vanilla Unity folder.
+
+
+To get Gemini to prompt questions, you'll need to clone another repository and follow the rules there, as that aspect is on another repository: https://github.com/BrainForgeAI/GeminiApp
