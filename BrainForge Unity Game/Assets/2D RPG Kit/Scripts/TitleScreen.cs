@@ -42,7 +42,12 @@ public class TitleScreen : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-        // initialization
+        // initialization + Adding Listeners
+
+        // Add Listeners
+        selectFileButton.onClick.AddListener(SelectFile);
+        uploadButton.onClick.AddListener(() => StartCoroutine(UploadFile()));
+
         fileUploadCanvasGroup = fileUploadScreen.GetComponent<CanvasGroup>();
         if (fileUploadCanvasGroup == null)
         {
@@ -180,17 +185,11 @@ private void StartNewGame(int difficulty)
     SceneManager.LoadScene(newGameScene);
 }
 
-public void NewGame()
+    public void NewGame()
     {
         Debug.Log("NewGame method called");
         mainMenu.SetActive(false);
         ShowFileUploadScreen();
-
-        // Make sure these are set up only once, not every time NewGame is called
-        if (selectFileButton.onClick.GetPersistentEventCount() == 0)
-            selectFileButton.onClick.AddListener(SelectFile);
-        if (uploadButton.onClick.GetPersistentEventCount() == 0)
-            uploadButton.onClick.AddListener(() => StartCoroutine(UploadFile()));
     }
 
     private void ShowFileUploadScreen()
@@ -236,14 +235,15 @@ public void NewGame()
         if (!string.IsNullOrEmpty(selectedFilePath))
         {
             selectedFileText.text = Path.GetFileName(selectedFilePath);
-            Debug.Log(selectedFileText.text);
+            Debug.Log("Selected file: " + selectedFileText.text);
             uploadButton.interactable = true;
         }
     }
 
+
     private IEnumerator UploadFile()
     {
-        if (string.IsNullOrEmpty(Path.GetFileName(selectedFilePath)))
+        if (string.IsNullOrEmpty(selectedFilePath))
         {
             Debug.LogError("No file selected");
             yield break;
@@ -258,13 +258,17 @@ public void NewGame()
 
             if (www.result != UnityWebRequest.Result.Success)
             {
-                Debug.LogError(www.error);
+                Debug.LogError("File upload failed: " + www.error);
+                // Optionally, show an error message to the user
             }
             else
             {
                 Debug.Log("File upload complete!");
-
+                // Clear the selected file path
+                selectedFilePath = string.Empty;
+                // Hide the file upload screen
                 HideFileUploadScreen();
+                // Proceed to difficulty settings
                 OpenDifficultySettings();
             }
         }
