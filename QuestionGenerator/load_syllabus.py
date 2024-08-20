@@ -34,11 +34,3 @@ def load_syllabus(gemini_model: genai, path_to_file: str | pathlib.Path
 # TODO: Method to get file path from user (E.g. from the game).
 def get_file_path():
     raise NotImplementedError
-
-
-
-
-     
-    
-    
-    

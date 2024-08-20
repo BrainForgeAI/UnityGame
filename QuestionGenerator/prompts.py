@@ -9,6 +9,5 @@ question_guidelines = """The questions you generate should only be related to th
   "question": ""
 }"""
 
-summarize_prompt = "\n\nCan you summarize the course content in this outline as a neatly formatted list? If there is some sort of overview of topics covered, prioritize that."
-        
+summarize_prompt = "\n\nCan you summarize the course content in this outline as a neatly formatted list? If there is some sort of overview of topics covered, prioritize that."   
         
