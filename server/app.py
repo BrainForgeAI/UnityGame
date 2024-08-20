@@ -1,4 +1,5 @@
 import os
+import random
 from flask import Flask, render_template, request, jsonify, Response
 
 # # Add the parent directory to the Python path
@@ -32,11 +33,12 @@ def upload_syllabus() -> Response:
         
         try:
             global qg
-            print("problem")
+
             _, syllabus = load_syllabus(gemini_model=QuestionGenerator.model, path_to_file=file_path)
-            print('solution')
             qg = QuestionGenerator(syllabus=syllabus)
+
             return jsonify({'message': 'Syllabus loaded successfully'}), 200
+
         except Exception as e:
             return jsonify({'error': str(e)}), 500
 
@@ -58,7 +60,9 @@ def get_question() -> Response:
     global current_question, qg
     if qg is None:
         return jsonify({'error': 'Syllabus not loaded'}), 400
-    _, _, current_question = qg.generate_response_questions()
+    
+    mcq = random.choice([True, False]) # randomly generate MCQ or short answer question for now.
+    _, _, current_question = qg.generate_response_questions(multiple_choice=mcq)
     
     return jsonify(current_question)
 
