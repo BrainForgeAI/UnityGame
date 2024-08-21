@@ -1,0 +1,48 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b2556bb0d236966468fd1e6bd2eeaffd, type: 3}
+  m_Name: harborMaster
+  m_EditorClassIdentifier: 
+  portraits:
+  - {fileID: 699703873648253923, guid: 5dee9006179220145ba7295536490dbc, type: 3}
+  - {fileID: 2434629766918126224, guid: 5dee9006179220145ba7295536490dbc, type: 3}
+  - {fileID: 8558633213039616950, guid: 5dee9006179220145ba7295536490dbc, type: 3}
+  lines:
+  - //Harbor Master
+  - '**'
+  - State your business, newcomer. We don't often see unfamiliar faces here.
+  - //Rem
+  - '**'
+  - I seek an audience with the Merchant King. I come on behalf of my struggling
+    island.
+  - //Harbor Master
+  - '**'
+  - (laughs)
+  - You and everyone else! The Merchant King doesn't meet with just anyone.
+  - //Rem
+  - '**'
+  - Then how can I meet him?
+  - //Harbor Master
+  - '**'
+  - "You're new here\u2026 Word of advice \u2013 in the Golden Isle, everything's
+    for sale... even information."
+  - However, the currency in this land is skill.
+  - Follow this trail and near the 2 lakes, there is a wandering adventurer.
+  - Defeat him and prove your skill.
+  - //Rem
+  - '**'
+  - A Wandering Adventurer? I've come this far... I suppose I have no choice but
+    to try.
+  - //Harbor Master
+  - '**'
+  - If you defeat him, he is known to be helpful towards travelers.
+  closingMessage: []

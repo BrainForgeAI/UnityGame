@@ -14,8 +14,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   portraits: []
   lines:
-  - //Villager
+  - //Guard 
   - '**'
-  - This thing next to me is a save point.
-  - With this, the player can save their complete progress!
+  - Turn back, stranger. The boss doesn't have time for every wanderer who washes up on our beach.
+  - //Rem
+  - '**'
+  - Please, I've come a long way. My people need help.
+  - //Guard
+  - '**'
+  - Ha! Everyone needs something. If you want to see the boss, you'll have to fight your way in.
+  - Think you can handle that?
+  - //Rem
+  - '**'
+  - If that's what it takes, I'm ready
+
   closingMessage: []
