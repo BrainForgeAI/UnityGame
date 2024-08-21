@@ -78,7 +78,9 @@ def submit_answer() -> Response:
     if qg is None:
         return jsonify({'error': 'Syllabus not loaded'}), 400
     answer = request.form['answer']
-    _, _, current_question = qg.generate_response_questions(answer=answer)
+    
+    mcq = random.choice([True, False]) # randomly generate MCQ or short answer question for now.
+    _, _, current_question = qg.generate_response_questions(answer=answer, multiple_choice=mcq)
     
     if "IAMDONE" in current_question['question']:
         return jsonify({'question': "Question generation completed.", 'completed': True})
