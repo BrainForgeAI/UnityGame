@@ -131,7 +131,7 @@ public class BattleManager : MonoBehaviour
     public Button targetCharacterButton1;
 
 
-    public Button submitButton;
+
 
     [Header("Battle Positions")]
     //Positions of characters & enemies
@@ -223,7 +223,6 @@ public class BattleManager : MonoBehaviour
         instance = this;
         DontDestroyOnLoad(gameObject);
         // Initially hide the Submit button
-        submitButton.interactable = false;
     }
 
     // Update is called once per frame
@@ -571,7 +570,6 @@ public class BattleManager : MonoBehaviour
         skillButton.interactable = true;
         itemButton.interactable = true;
         retreatButton.interactable = true;
-        submitButton.interactable = false;
 
         if (!GameManager.instance.dialogActive)
         {
@@ -717,7 +715,6 @@ public class BattleManager : MonoBehaviour
         if (GlobalUIManager.Instance != null)
         {
             GlobalUIManager.Instance.ShowAnswerInput();
-            submitButton.gameObject.SetActive(true); // Show the Submit button
         }
     }
 
