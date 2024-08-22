@@ -18,6 +18,9 @@ EditorBuildSettings:
     path: Assets/2D RPG Kit/Scenes/System Maps/Credits.unity
     guid: ed6a8edeabd9d9641bcc046340897021
   - enabled: 1
+    path: Assets/2D RPG Kit/Scenes/Demo/islandMap.unity
+    guid: e55d2e9e0f256534791e551f194a5076
+  - enabled: 1
     path: Assets/2D RPG Kit/Scenes/Demo/Room.unity
     guid: f9a9b4c0df245e941b9924da9abf19d8
   - enabled: 1
@@ -59,10 +62,28 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/2D RPG Kit/Scenes/Demo/Cave 5.unity
     guid: ededbe0166520534e9d6b1313ffa4b02
-  - enabled: 1
+  - enabled: 0
     path: Assets/Tutorial Maps/Tutorial House 1.unity
     guid: 9374435c0df60db43b958f707edffb71
-  - enabled: 1
+  - enabled: 0
     path: Assets/Tutorial Maps/Tutorial Town.unity
     guid: b8fcb41ce1e923b44b0feeae5abb32cd
+  - enabled: 1
+    path: Assets/2D RPG Kit/Scenes/Demo/island 1.unity
+    guid: f607b33472a2b8a478adc56ac05fea00
+  - enabled: 1
+    path: Assets/2D RPG Kit/Scenes/Demo/island 2.unity
+    guid: cb3eb090cb9dcc64ca29c33321eefbc3
+  - enabled: 1
+    path: Assets/2D RPG Kit/Scenes/Demo/island 3.unity
+    guid: 63527fa8fd37f754bbefb45546aac3ef
+  - enabled: 0
+    path: Assets/2D RPG Kit/Scenes/Demo/island 4.unity
+    guid: 5eef7eccee330354786ee151f7cb5b7a
+  - enabled: 1
+    path: Assets/2D RPG Kit/Scenes/Demo/island2Boss.unity
+    guid: 95d29130714b11b499e80b46815cd5df
+  - enabled: 1
+    path: Assets/2D RPG Kit/Scenes/Demo/island2After.unity
+    guid: d2bc9cf4bbd5fe54b947a88404173424
   m_configObjects: {}

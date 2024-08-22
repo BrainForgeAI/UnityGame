@@ -24,7 +24,7 @@
 To begin working on the game:
 
 1. Navigate to `Assets -> 2D RPG KIT -> Scenes -> Demo`.
-2. Choose a map section to start with.
+2. Choose a map section to start with. (Our map starts with island 1)
 
 **Note:** There are two "Scene" folders. Use the one from the 2D RPG KIT asset, not the vanilla Unity folder.
 
