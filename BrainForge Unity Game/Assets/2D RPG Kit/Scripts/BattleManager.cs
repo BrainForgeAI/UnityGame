@@ -4,6 +4,25 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using UnityStandardAssets.CrossPlatformInput;
+using UnityEngine.Networking;
+
+
+public class QuestionResponse
+{
+    public string prev_question;
+    public string question;
+    public string prev_question_answer;
+    public string prev_question_actual_right_answer;
+    public int question_number;
+    public string topic;
+    public string difficulty;
+}
+
+[System.Serializable]
+public class ErrorResponse
+{
+    public string error;
+}
 
 public class BattleManager : MonoBehaviour
 {
@@ -109,6 +128,9 @@ public class BattleManager : MonoBehaviour
     public Button useItemButton;
     public Button targetCharacterButton1;
 
+
+    public Button submitButton;
+
     [Header("Battle Positions")]
     //Positions of characters & enemies
     public Transform[] characterPositions;
@@ -170,6 +192,11 @@ public class BattleManager : MonoBehaviour
     public bool noRetreat;
     public bool unbeatable;
 
+    // Question Prompt
+    [Header("Question Display")]
+    public Text questionText; // Assign this in the Unity Inspector
+    public float textDisplayDuration = 3f; // Duration to display the text, adjustable in Inspector
+
     //For the DelayCo() so the function knows which character is selected when using items
     int selectCharForItem;
 
@@ -193,6 +220,8 @@ public class BattleManager : MonoBehaviour
     {
         instance = this;
         DontDestroyOnLoad(gameObject);
+        // Initially hide the Submit button
+        submitButton.interactable = false;
     }
 
     // Update is called once per frame
@@ -383,6 +412,11 @@ public class BattleManager : MonoBehaviour
             GameMenu.instance.SelectFirstButton();
         }
 
+        
+        // Poll attack button so that we know when it is pressed
+        attackButton.onClick.AddListener(OnAttackButtonPressed);
+
+
         //Put the correct values into the character status within the battle menu
         UpdateCharacterStatus();
 
@@ -535,6 +569,7 @@ public class BattleManager : MonoBehaviour
         skillButton.interactable = true;
         itemButton.interactable = true;
         retreatButton.interactable = true;
+        submitButton.interactable = false;
 
         if (!GameManager.instance.dialogActive)
         {
@@ -671,6 +706,17 @@ public class BattleManager : MonoBehaviour
         yield return new WaitForSeconds(1f);
         NextTurn();
 
+    }
+
+    // If attack button pressed display the question and the input field.
+    public void OnAttackButtonPressed()
+    {
+        StartCoroutine(GetQuestionCoroutine());
+        if (GlobalUIManager.Instance != null)
+        {
+            GlobalUIManager.Instance.ShowAnswerInput();
+            submitButton.gameObject.SetActive(true); // Show the Submit button
+        }
     }
 
     //Method for enemy attacks
@@ -1105,6 +1151,130 @@ public class BattleManager : MonoBehaviour
         StartCoroutine(DelayAttackCo(moveName, selectedTarget));
 
     }
+
+    // Question display
+
+    private const string SERVER_URL = "http://localhost:5001"; // Adjust the port if needed
+
+    private IEnumerator GetQuestionCoroutine()
+    {
+        // Show the input processing UI
+        if (GlobalUIManager.Instance != null)
+        {
+            GlobalUIManager.Instance.ShowAnswerInput();
+        }
+        else
+        {
+            Debug.LogError("GlobalUIManager instance is null!");
+            yield break;
+        }
+
+        string url = $"{SERVER_URL}/get_question";
+        using (UnityWebRequest webRequest = UnityWebRequest.Get(url))
+        {
+            yield return webRequest.SendWebRequest();
+            string questionToDisplay = "";
+            if (webRequest.responseCode == 400)
+            {
+                string responseText = webRequest.downloadHandler.text;
+                ErrorResponse errorResponse = JsonUtility.FromJson<ErrorResponse>(responseText);
+                if (errorResponse != null && !string.IsNullOrEmpty(errorResponse.error))
+                {
+                    Debug.Log($"Error received: {errorResponse.error}");
+                    questionToDisplay = $"Error: {errorResponse.error}";
+                }
+                else
+                {
+                    Debug.LogWarning("Received a 400 response, but couldn't parse the error message.");
+                    questionToDisplay = "An error occurred while fetching the question.";
+                }
+            }
+            else if (webRequest.result != UnityWebRequest.Result.Success)
+            {
+                Debug.LogError($"Unexpected error: {webRequest.error}");
+                questionToDisplay = "An error occurred while fetching the question.";
+            }
+            else
+            {
+                string responseText = webRequest.downloadHandler.text;
+                QuestionResponse questionResponse = JsonUtility.FromJson<QuestionResponse>(responseText);
+                if (questionResponse != null && !string.IsNullOrEmpty(questionResponse.question))
+                {
+                    Debug.Log($"Received question: {questionResponse.question}");
+                    questionToDisplay = questionResponse.question;
+                }
+                else
+                {
+                    Debug.LogWarning("Received a response, but couldn't parse the question.");
+                    questionToDisplay = "Unable to load question. Please try again.";
+                }
+            }
+            DisplayQuestion(questionToDisplay);
+        }
+    }
+
+    private void DisplayQuestion(string question)
+    {
+        if (GlobalUIManager.Instance != null)
+        {
+            GlobalUIManager.Instance.UpdateQuestionText(question);
+        }
+        else
+        {
+            Debug.LogError("GlobalUIManager instance is null!");
+        }
+    }
+
+    public void SubmitAnswer(string answer)
+    {
+        StartCoroutine(SendAnswerToServer(answer));
+    }
+
+    private IEnumerator SendAnswerToServer(string answer)
+    {
+        WWWForm form = new WWWForm();
+        form.AddField("answer", answer);
+
+        using (UnityWebRequest www = UnityWebRequest.Post($"{SERVER_URL}/submit_answer", form))
+        {
+            yield return www.SendWebRequest();
+
+            if (www.result != UnityWebRequest.Result.Success)
+            {
+                Debug.LogError($"Error sending answer: {www.error}");
+                DisplayQuestion("Error submitting answer. Please try again.");
+            }
+            else
+            {
+                // Parse the JSON response
+                string responseText = www.downloadHandler.text;
+                QuestionResponse questionResponse = JsonUtility.FromJson<QuestionResponse>(responseText);
+
+                if (questionResponse != null)
+                {
+                    // Display whether the previous answer was right or wrong
+                    string feedback = questionResponse.prev_question;
+                    Debug.Log($"Feedback received: {feedback}");
+                    DisplayQuestion(feedback);
+
+                    // Wait for 5 seconds
+                    yield return new WaitForSeconds(5);
+
+                    // Display the next question
+                    string questionToDisplay = questionResponse.question;
+                    DisplayQuestion(questionToDisplay);
+                }
+                else
+                {
+                    Debug.LogWarning("Received a response, but couldn't parse the feedback.");
+                    DisplayQuestion("Unable to process response. Please try again.");
+                }
+            }
+        }
+    }
+
+
+
 
     //Adds a slight delay between choosing the target and affecting the target with the item
     public IEnumerator DelayAttackCo(string moveName, int selectedTarget)

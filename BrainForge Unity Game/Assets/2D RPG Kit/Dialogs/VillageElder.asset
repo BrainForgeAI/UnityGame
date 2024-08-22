@@ -1,0 +1,40 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b2556bb0d236966468fd1e6bd2eeaffd, type: 3}
+  m_Name: VillageElder
+  m_EditorClassIdentifier: 
+  portraits: []
+  lines:
+  - //Village Elder
+  - '**'
+  - "Ah, I've been expecting you, young one. I can see the worry in your eyes \u2013"
+  - The same worry that plagues us all.
+  - //Rem
+  - '**'
+  - Elder, I can't ignore it anymore. Our village is struggling. There must be something
+    we can do.
+  - //Village Elder
+  - '**'
+  - Indeed, our island has fallen on hard times. Our resources dwindle, and our people
+    suffer.
+  - We need someone brave enough to venture beyond our shores,
+  - to seek help and new opportunities. Are you willing to take on this crucial task?
+  - //Rem
+  - '**'
+  - I... I've never left the island before. But if our people need help, I'll do
+    whatever it takes!!
+  - //Village Elder
+  - '**'
+  - Your courage gives me hope. But be warned, the journey won't be easy.
+  - You'll need to prove yourself worthy even to leave our shores.
+  - Head to the island dock where you will face your first challenge.
+  closingMessage: []

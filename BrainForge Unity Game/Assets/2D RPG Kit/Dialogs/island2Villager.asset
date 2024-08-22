@@ -1,0 +1,28 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b2556bb0d236966468fd1e6bd2eeaffd, type: 3}
+  m_Name: island2Villager
+  m_EditorClassIdentifier: 
+  portraits: []
+  lines:
+  - //New Villager
+  - '**'
+  - A newcomer? We don't get many visitors here. What brings you to our shores?
+  - //Rem
+  - '**'
+  - I've come seeking aid for my home island. We're struggling to survive...
+  - //New Villager
+  - '**'
+  - Ah, a noble cause. But I'm afraid our island has its own problems.
+  - Our leader might be able to help, but... well,
+  - let's just say he doesn't meet with outsiders easily.
+  closingMessage: []
