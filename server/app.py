@@ -1,7 +1,7 @@
 import os
 import sys
 import random
-from flask import Flask, render_template, request, jsonify, Response
+from flask import Flask, request, jsonify, Response
 
 # Add the parent directory to the Python path
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
@@ -48,7 +48,7 @@ def index() -> str:
     """
     Renders index.html.
     """
-    return render_template('index.html')
+    return jsonify(200)
 
 @app.route('/get_question', methods=['GET'])
 def get_question() -> Response:
