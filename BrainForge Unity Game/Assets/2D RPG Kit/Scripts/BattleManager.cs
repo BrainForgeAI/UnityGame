@@ -7,6 +7,7 @@ using UnityStandardAssets.CrossPlatformInput;
 using UnityEngine.Networking;
 
 
+[System.Serializable]
 public class QuestionResponse
 {
     public string prev_question;
@@ -16,6 +17,8 @@ public class QuestionResponse
     public int question_number;
     public string topic;
     public string difficulty;
+    public Dictionary<string, string> mcq_options;
+    public bool completed;
 }
 
 [System.Serializable]
@@ -83,7 +86,6 @@ public class BattleManager : MonoBehaviour
     public Text[] characterSP;
     public Slider[] SPSlider;
     public Text[] characterLevel;
-
 
     //For initiation of the correct number of characters and enemies
     [HideInInspector]
@@ -189,6 +191,7 @@ public class BattleManager : MonoBehaviour
 
     [Header("General")]
     //For checking if you are able to retreat from the current battle
+
     public bool noRetreat;
     public bool unbeatable;
 
@@ -199,7 +202,6 @@ public class BattleManager : MonoBehaviour
 
     //For the DelayCo() so the function knows which character is selected when using items
     int selectCharForItem;
-
     //For using skillon player characters
     public int selectedSkillChar;
     public int selectedSkillCost;
@@ -1157,61 +1159,71 @@ public class BattleManager : MonoBehaviour
     private const string SERVER_URL = "http://localhost:5001"; // Adjust the port if needed
 
     private IEnumerator GetQuestionCoroutine()
+{
+    // Show the input processing UI
+    if (GlobalUIManager.Instance != null)
     {
-        // Show the input processing UI
-        if (GlobalUIManager.Instance != null)
-        {
-            GlobalUIManager.Instance.ShowAnswerInput();
-        }
-        else
-        {
-            Debug.LogError("GlobalUIManager instance is null!");
-            yield break;
-        }
+        GlobalUIManager.Instance.ShowAnswerInput();
+    }
+    else
+    {
+        Debug.LogError("GlobalUIManager instance is null!");
+        yield break;
+    }
 
-        string url = $"{SERVER_URL}/get_question";
-        using (UnityWebRequest webRequest = UnityWebRequest.Get(url))
+    string url = $"{SERVER_URL}/get_question";
+    using (UnityWebRequest webRequest = UnityWebRequest.Get(url))
+    {
+        yield return webRequest.SendWebRequest();
+        string questionToDisplay = "";
+        if (webRequest.responseCode == 400)
         {
-            yield return webRequest.SendWebRequest();
-            string questionToDisplay = "";
-            if (webRequest.responseCode == 400)
+            string responseText = webRequest.downloadHandler.text;
+            ErrorResponse errorResponse = JsonUtility.FromJson<ErrorResponse>(responseText);
+            if (errorResponse != null && !string.IsNullOrEmpty(errorResponse.error))
             {
-                string responseText = webRequest.downloadHandler.text;
-                ErrorResponse errorResponse = JsonUtility.FromJson<ErrorResponse>(responseText);
-                if (errorResponse != null && !string.IsNullOrEmpty(errorResponse.error))
-                {
-                    Debug.Log($"Error received: {errorResponse.error}");
-                    questionToDisplay = $"Error: {errorResponse.error}";
-                }
-                else
-                {
-                    Debug.LogWarning("Received a 400 response, but couldn't parse the error message.");
-                    questionToDisplay = "An error occurred while fetching the question.";
-                }
-            }
-            else if (webRequest.result != UnityWebRequest.Result.Success)
-            {
-                Debug.LogError($"Unexpected error: {webRequest.error}");
-                questionToDisplay = "An error occurred while fetching the question.";
+                Debug.Log($"Error received: {errorResponse.error}");
+                questionToDisplay = $"Error: {errorResponse.error}";
             }
             else
             {
-                string responseText = webRequest.downloadHandler.text;
-                QuestionResponse questionResponse = JsonUtility.FromJson<QuestionResponse>(responseText);
-                if (questionResponse != null && !string.IsNullOrEmpty(questionResponse.question))
+                Debug.LogWarning("Received a 400 response, but couldn't parse the error message.");
+                questionToDisplay = "An error occurred while fetching the question.";
+            }
+        }
+        else if (webRequest.result != UnityWebRequest.Result.Success)
+        {
+            Debug.LogError($"Unexpected error: {webRequest.error}");
+            questionToDisplay = "An error occurred while fetching the question.";
+        }
+        else
+        {
+            string responseText = webRequest.downloadHandler.text;
+            QuestionResponse questionResponse = JsonUtility.FromJson<QuestionResponse>(responseText);
+            if (questionResponse != null && !string.IsNullOrEmpty(questionResponse.question))
+            {
+                Debug.Log($"Received question: {questionResponse.question}");
+                questionToDisplay = questionResponse.question;
+                
+                // Check if it's an MCQ
+                if (questionResponse.mcq_options != null && questionResponse.mcq_options.Count > 0)
                 {
-                    Debug.Log($"Received question: {questionResponse.question}");
-                    questionToDisplay = questionResponse.question;
-                }
-                else
-                {
-                    Debug.LogWarning("Received a response, but couldn't parse the question.");
-                    questionToDisplay = "Unable to load question. Please try again.";
+                    questionToDisplay += "\n\nOptions:";
+                    foreach (var option in questionResponse.mcq_options)
+                    {
+                        questionToDisplay += $"\n{option.Key}: {option.Value}";
+                    }
                 }
             }
-            DisplayQuestion(questionToDisplay);
+            else
+            {
+                Debug.LogWarning("Received a response, but couldn't parse the question.");
+                questionToDisplay = "Unable to load question. Please try again.";
+            }
         }
+        DisplayQuestion(questionToDisplay);
     }
+}
 
     private void DisplayQuestion(string question)
     {
@@ -1231,47 +1243,66 @@ public class BattleManager : MonoBehaviour
     }
 
     private IEnumerator SendAnswerToServer(string answer)
+{
+    WWWForm form = new WWWForm();
+    form.AddField("answer", answer);
+
+    using (UnityWebRequest www = UnityWebRequest.Post($"{SERVER_URL}/submit_answer", form))
     {
-        WWWForm form = new WWWForm();
-        form.AddField("answer", answer);
+        yield return www.SendWebRequest();
 
-        using (UnityWebRequest www = UnityWebRequest.Post($"{SERVER_URL}/submit_answer", form))
+        if (www.result != UnityWebRequest.Result.Success)
         {
-            yield return www.SendWebRequest();
+            Debug.LogError($"Error sending answer: {www.error}");
+            DisplayQuestion("Error submitting answer. Please try again.");
+        }
+        else
+        {
+            // Parse the JSON response
+            string responseText = www.downloadHandler.text;
+            QuestionResponse questionResponse = JsonUtility.FromJson<QuestionResponse>(responseText);
 
-            if (www.result != UnityWebRequest.Result.Success)
+            if (questionResponse != null)
             {
-                Debug.LogError($"Error sending answer: {www.error}");
-                DisplayQuestion("Error submitting answer. Please try again.");
+                // Display whether the previous answer was right or wrong
+                string feedback = questionResponse.prev_question;
+                Debug.Log($"Feedback received: {feedback}");
+                DisplayQuestion(feedback);
+
+                // Wait for 5 seconds
+                yield return new WaitForSeconds(5);
+
+                // Display the next question
+                string questionToDisplay = questionResponse.question;
+                
+                // Check if it's an MCQ
+                if (questionResponse.mcq_options != null && questionResponse.mcq_options.Count > 0)
+                {
+                    questionToDisplay += "\n\nOptions:";
+                    foreach (var option in questionResponse.mcq_options)
+                    {
+                        questionToDisplay += $"\n{option.Key}: {option.Value}";
+                    }
+                }
+                
+                DisplayQuestion(questionToDisplay);
+
+                // Check if the question generation is completed
+                if (questionResponse.completed)
+                {
+                    // Handle completion (e.g., show a completion message, end the game, etc.)
+                    Debug.Log("Question generation completed.");
+                    // Add your completion logic here
+                }
             }
             else
             {
-                // Parse the JSON response
-                string responseText = www.downloadHandler.text;
-                QuestionResponse questionResponse = JsonUtility.FromJson<QuestionResponse>(responseText);
-
-                if (questionResponse != null)
-                {
-                    // Display whether the previous answer was right or wrong
-                    string feedback = questionResponse.prev_question;
-                    Debug.Log($"Feedback received: {feedback}");
-                    DisplayQuestion(feedback);
-
-                    // Wait for 5 seconds
-                    yield return new WaitForSeconds(5);
-
-                    // Display the next question
-                    string questionToDisplay = questionResponse.question;
-                    DisplayQuestion(questionToDisplay);
-                }
-                else
-                {
-                    Debug.LogWarning("Received a response, but couldn't parse the feedback.");
-                    DisplayQuestion("Unable to process response. Please try again.");
-                }
+                Debug.LogWarning("Received a response, but couldn't parse the feedback.");
+                DisplayQuestion("Unable to process response. Please try again.");
             }
         }
     }
+}
 
 
 
