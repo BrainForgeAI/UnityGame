@@ -92,4 +92,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/2D RPG Kit/Scenes/Demo/island3Merchant.unity
     guid: 01f4f8d210826c843a5cd9a9ab09217a
+  - enabled: 1
+    path: Assets/2D RPG Kit/Scenes/Demo/island3After.unity
+    guid: c3f100a394521674ea8f1c0e264bd3da
   m_configObjects: {}
