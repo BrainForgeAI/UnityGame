@@ -16,15 +16,29 @@ MonoBehaviour:
   - {fileID: 699703873648253923, guid: 5dee9006179220145ba7295536490dbc, type: 3}
   - {fileID: 2434629766918126224, guid: 5dee9006179220145ba7295536490dbc, type: 3}
   lines:
-  - //Hollis
-  - '**1'
-  - Hey Rem, what are you up to today?
+  - //Adventurer
+  - '**'
+  - "Halt, traveler! You seem purposeful in your stride. What brings you to my little corner of the Golden Isle?
   - //Rem
-  - '**0'
-  - Hello Hollis, I was actually on my way to the shop.
-  - But it seems I've got the wrong house.
-  - //Hollis
-  - '**1'
-  - Haha classic Rem. No sense of orientation.
-  - The shop is right next door!
+  - '**'
+  - I seek an audience with the Merchant King
+  - I was told proving my skill against you might help me achieve that goal
+  - //Adventurer
+  - '**'
+  - Ah, another hopeful soul seeking fortune and favor. Very well, I accept your challenge.
+  - But know this – I've bested warriors from every corner of these isles.
+  - //Rem
+  - '**'
+  - I've come too far to back down now. What are the terms of our duel?
+  - //Adventurer
+  - '**'
+  - A test of both mind and body.
+  - Engaging the mind while crossing blades is considered luxury in this land.
+  - Find yourself a lucky individual. Are you prepared?
+  - //Rem
+  - '**'
+  - I am. Let the challenge begin. Walk toward the path past me.
+
+ 
+
   closingMessage: []

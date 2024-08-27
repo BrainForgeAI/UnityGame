@@ -1,0 +1,50 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b2556bb0d236966468fd1e6bd2eeaffd, type: 3}
+  m_Name: Cave 5 Event 1
+  m_EditorClassIdentifier: 
+  portraits:
+  - {fileID: 699703873648253923, guid: 5dee9006179220145ba7295536490dbc, type: 3}
+  - {fileID: 2434629766918126224, guid: 5dee9006179220145ba7295536490dbc, type: 3}
+  - {fileID: 8558633213039616950, guid: 5dee9006179220145ba7295536490dbc, type: 3}
+  lines:
+  - //Rem
+  - '**'
+  - Your Majesty, I come seeking aid for my home island. We're facing dire times, and—
+  - //Merchant King
+  - '**'
+  - Spare me the sob story. Everyone wants something. What makes your island worth my investment?
+  - //Rem
+  - '**'
+  - We may not have gold or jewels, but we have resourceful people, 
+  - untapped natural resources, and a strategic location.
+  - With your support, we could become a valuable trading post and ally.
+  - //Merchant King
+  - '**'
+  - Interesting... But I don't make deals on mere promises.
+  - Prove your island's worth, and perhaps we can come to an arrangement.
+  - //Rem
+  - '**'
+  - What would you have me do?
+  - //Merchant King
+  - '**'
+  - There's a dangerous bandit causing havoc at the end of the mud trail south of my mansion.
+  - They've been intercepting my shipments and disrupting trade. 
+  - Deal with this menace, and I'll consider your proposal for an alliance.
+  - Fail, and you'll wish you'd never set foot on my golden shores. Do we have a deal?
+  - //Rem
+  - '**'
+  - (taking a deep breath)
+  - ... Ehm...
+  - I understand. I accept your challenge, Your Majesty. 
+  - I'll deal with this bandit and prove my worth.
+  closingMessage: []

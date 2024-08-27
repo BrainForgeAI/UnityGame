@@ -16,11 +16,16 @@ MonoBehaviour:
   - {fileID: 699703873648253923, guid: 5dee9006179220145ba7295536490dbc, type: 3}
   - {fileID: 2434629766918126224, guid: 5dee9006179220145ba7295536490dbc, type: 3}
   lines:
-  - //Hollis
-  - '**1'
-  - Look at that Rem.
-  - Someone pulled the log that served as a bridge out of the water.
+  - //Adventurer
+  - '**'
+  - (breathing heavily, lowering their weapon)
+  - Enough! You've proven your skill beyond doubt. I haven't had a challenge like that in years.
   - //Rem
-  - '**0'
-  - I guess we have to take a detour then if we don't want to get wet.
+  - '**'
+  - Thank you. You're as formidable as they say.
+  - //Adventurer
+  - '**'
+  - You've earned this victory, and with it, a token of my respect. Take this medallion.
+  - Show it to the Harbor Master, and he'll arrange your audience with the Merchant King.
+  - He is waiting for you on the other side of this pathway.
   closingMessage: []
