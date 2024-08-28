@@ -42,7 +42,7 @@ public class TitleScreen : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-        // initialization + Adding Listeners
+        // initialization
 
         // Add Listeners
         selectFileButton.onClick.AddListener(SelectFile);
@@ -67,9 +67,6 @@ public class TitleScreen : MonoBehaviour
         StartCoroutine(PressStartCo());
         ScreenFade.instance.fadeScreenObject.SetActive(false);
         AudioManager.instance.PlayBGM(music);
-        // Added listeners for file upload buttons
-        selectFileButton.onClick.AddListener(SelectFile);
-        uploadButton.onClick.AddListener(() => StartCoroutine(UploadFile()));
 
         StartCoroutine(DontShowcontrols());
     }
@@ -241,13 +238,17 @@ private void StartNewGame(int difficulty)
     }
 
 
+    private bool isUploading = false;
+
     private IEnumerator UploadFile()
     {
-        if (string.IsNullOrEmpty(selectedFilePath))
+        if (isUploading || string.IsNullOrEmpty(selectedFilePath))
         {
-            Debug.LogError("No file selected");
+            Debug.LogError("Upload in progress or no file selected");
             yield break;
         }
+
+        isUploading = true;
 
         WWWForm form = new WWWForm();
         form.AddBinaryData("file", File.ReadAllBytes(selectedFilePath), Path.GetFileName(selectedFilePath));
@@ -272,6 +273,8 @@ private void StartNewGame(int difficulty)
                 OpenDifficultySettings();
             }
         }
+
+        isUploading = false;
     }
 
     private void SetDifficulty(int difficulty)
