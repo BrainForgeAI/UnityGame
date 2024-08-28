@@ -238,13 +238,17 @@ private void StartNewGame(int difficulty)
     }
 
 
+    private bool isUploading = false;
+
     private IEnumerator UploadFile()
     {
-        if (string.IsNullOrEmpty(selectedFilePath))
+        if (isUploading || string.IsNullOrEmpty(selectedFilePath))
         {
-            Debug.LogError("No file selected");
+            Debug.LogError("Upload in progress or no file selected");
             yield break;
         }
+
+        isUploading = true;
 
         WWWForm form = new WWWForm();
         form.AddBinaryData("file", File.ReadAllBytes(selectedFilePath), Path.GetFileName(selectedFilePath));
@@ -269,6 +273,8 @@ private void StartNewGame(int difficulty)
                 OpenDifficultySettings();
             }
         }
+
+        isUploading = false;
     }
 
     private void SetDifficulty(int difficulty)
