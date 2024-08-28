@@ -42,7 +42,7 @@ public class TitleScreen : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-        // initialization + Adding Listeners
+        // initialization
 
         // Add Listeners
         selectFileButton.onClick.AddListener(SelectFile);
@@ -67,9 +67,6 @@ public class TitleScreen : MonoBehaviour
         StartCoroutine(PressStartCo());
         ScreenFade.instance.fadeScreenObject.SetActive(false);
         AudioManager.instance.PlayBGM(music);
-        // Added listeners for file upload buttons
-        selectFileButton.onClick.AddListener(SelectFile);
-        uploadButton.onClick.AddListener(() => StartCoroutine(UploadFile()));
 
         StartCoroutine(DontShowcontrols());
     }
