@@ -1740,6 +1740,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4123005656995624}
   - component: {fileID: 114767406652574682}
+  - component: {fileID: 2169586652181554136}
   m_Layer: 0
   m_Name: Battle Manager
   m_TagString: Untagged
@@ -1775,8 +1776,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9ddca49db092ebb4eaff9affbb973350, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  toolbar: 2
-  currentTab: Prefabs
+  toolbar: 0
+  currentTab: Initialization
   usable: 0
   buttonValue: 0
   spriteRenderer: {fileID: 212760558863176084}
@@ -2026,6 +2027,20 @@ MonoBehaviour:
   - {fileID: 7272134871027841180}
   - {fileID: 4717428467126314055}
   - {fileID: 6577468591189429996}
+--- !u!114 &2169586652181554136
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1299714629954660}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 34eb102dc52e3674c96a2a2d907782f9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  questionInputObject: {fileID: 3037126748664057719}
+  enterButtonObject: {fileID: 8607838464681757833}
 --- !u!1 &1312058871969948
 GameObject:
   m_ObjectHideFlags: 0
