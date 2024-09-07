@@ -63495,8 +63495,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 34eb102dc52e3674c96a2a2d907782f9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  questionInputObject: {fileID: 0}
-  enterButtonObject: {fileID: 0}
+  questionInputObject: {fileID: 1934194099}
+  enterButtonObject: {fileID: 1672269159}
 --- !u!4 &1698005538
 Transform:
   m_ObjectHideFlags: 0
