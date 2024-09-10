@@ -64,7 +64,7 @@ class QuestionGenerator:
         {self.questions_so_far}
         
         Additional info. (If "answer", that means the user provided an answer and you continue the question generation based on the correctness of the answer. If the answer is correct, permit the user to move on. If the answer is incorrect, reject the user).
-        (If "multiple-choice", that means you should generate a multiple choice question with 4 possible options. Add these options as mcq_options = dict() to the JSON output).
+        (If "multiple_choice is True", that means you should generate a multiple choice question with 4 possible options. Add these options as mcq_options = dict() to the JSON output. If "multiple_choice is False", just return a regular question (NO MULTIPLE CHOICE, DO NOT INCLUDE mcq_options in the JSON)).
         
         {', '.join([f'{key}: {value}' for key, value in kwargs.items()])}
 

@@ -738,7 +738,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &356614840
 RectTransform:
   m_ObjectHideFlags: 0
@@ -817,8 +817,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5c87cb0015b82334fae7e0e4c89008c9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  toolbar: 0
-  currentTab: Display
+  toolbar: 3
+  currentTab: Environment
   blackScreen: 0
   fadeFromBlack: 0
   activateScreenFade: 0
@@ -1096,9 +1096,9 @@ RectTransform:
   - {fileID: 747170164}
   m_Father: {fileID: 356614840}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 50, y: -54.2}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 418.2, y: 108.4}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &572578176
@@ -1363,9 +1363,9 @@ RectTransform:
   - {fileID: 1128791518}
   m_Father: {fileID: 356614840}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 50, y: -271}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 418.2, y: 108.4}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &605881901
@@ -1554,9 +1554,9 @@ RectTransform:
   - {fileID: 678598152}
   m_Father: {fileID: 356614840}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 50, y: -162.6}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 418.2, y: 108.4}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &614055138
@@ -1838,7 +1838,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   music: 11
-  newGameScene: Room
+  newGameScene: island 1
   continueButton: {fileID: 614055136}
   mainMenu: {fileID: 356614839}
   difficultySettings: {fileID: 1046321193}

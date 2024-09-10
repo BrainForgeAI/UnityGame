@@ -1,7 +1,8 @@
 import os
 import sys
-import logging
-from flask import Flask, render_template, request, jsonify, Response
+
+import random
+from flask import Flask, request, jsonify, Response
 
 # Add the parent directory to the Python path
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
@@ -40,11 +41,13 @@ def upload_syllabus() -> Response:
         
         try:
             global qg
-            logger.info("Attempting to load syllabus...")
+
             _, syllabus = load_syllabus(gemini_model=QuestionGenerator.model, path_to_file=file_path)
-            logger.info("Syllabus loaded successfully")
+
             qg = QuestionGenerator(syllabus=syllabus)
+
             return jsonify({'message': 'Syllabus loaded successfully'}), 200
+
         except Exception as e:
             logger.error(f"Error loading syllabus: {str(e)}", exc_info=True)
             return jsonify({'error': str(e)}), 500
@@ -54,7 +57,7 @@ def index() -> str:
     """
     Renders index.html.
     """
-    return render_template('index.html')
+    return jsonify(200)
 
 @app.route('/get_question', methods=['GET'])
 def get_question() -> Response:
@@ -68,7 +71,9 @@ def get_question() -> Response:
     if qg is None:
         logger.warning("Attempt to get question when syllabus is not loaded")
         return jsonify({'error': 'Syllabus not loaded'}), 400
-    _, _, current_question = qg.generate_response_questions()
+    
+    mcq = random.choice([True, False]) # randomly generate MCQ or short answer question for now.
+    _, _, current_question = qg.generate_response_questions(multiple_choice=mcq)
     
     return jsonify(current_question)
 
@@ -85,7 +90,9 @@ def submit_answer() -> Response:
         logger.warning("Attempt to submit answer when syllabus is not loaded")
         return jsonify({'error': 'Syllabus not loaded'}), 400
     answer = request.form['answer']
-    _, _, current_question = qg.generate_response_questions(answer=answer)
+    
+    mcq = random.choice([True, False]) # randomly generate MCQ or short answer question for now.
+    _, _, current_question = qg.generate_response_questions(answer=answer, multiple_choice=mcq)
     
     if "IAMDONE" in current_question['question']:
         logger.info("Question generation completed")

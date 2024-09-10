@@ -1,0 +1,49 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b2556bb0d236966468fd1e6bd2eeaffd, type: 3}
+  m_Name: afterMerchant
+  m_EditorClassIdentifier: 
+  portraits:
+  - {fileID: 699703873648253923, guid: 5dee9006179220145ba7295536490dbc, type: 3}
+  - {fileID: 2434629766918126224, guid: 5dee9006179220145ba7295536490dbc, type: 3}
+  - {fileID: 8558633213039616950, guid: 5dee9006179220145ba7295536490dbc, type: 3}
+  lines:
+  - //Merchant Kinf
+  - '**'
+  - Well, I must admit, I'm impressed. You've done what many of my best guards could
+    not.
+  - Why don't you stay here as a guard, I will provide excellent company.
+  - //Rem
+  - '**'
+  - No thank you, people back home are relying on me.
+  - I've fulfilled my end of the bargain. Will you now consider helping my island?
+  - //Merchant King
+  - '**'
+  - Indeed. You've proven your worth and the potential of your people.
+  - Very well, I'll provide resources to aid your island.
+  - We'll start with food supplies and building materials.
+  - //Rem
+  - '**'
+  - Thank you, Your Majesty. This will make a huge difference to my people.
+  - //Merchant King
+  - '**'
+  - Don't thank me yet. This is just the beginning.
+  - I expect your island to become a valuable trading post in return.
+  - //Rem
+  - '**'
+  - We won't let you down. My people are resourceful and hardworking.
+  - With these resources, we can build something great.
+  - //Merchant King
+  - '**'
+  - See that you do. You've shown promise, outlander. Don't make me regret this decision.
+  - I have prepared your departure, just continue down on the path.
+  closingMessage: []

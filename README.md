@@ -40,7 +40,7 @@ To get Gemini to prompt questions, you'll need to clone another repository and f
 
 3. Install dependencies by using `pip3 install -r requirements.txt`
 
-4. Set up your [API key](#setting-up-an-api-key)
+4. Set up your [API key](https://ai.google.dev/gemini-api/docs/api-key?authuser=2)
 
 5. Set up [pre-commit linting](#linting)
 
